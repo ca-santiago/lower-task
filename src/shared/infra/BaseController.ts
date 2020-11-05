@@ -11,6 +11,7 @@ export abstract class BaseController {
             await this.executeImpl(req, res);
         } catch (err) {
             console.log(`Loggin the error ${err}`);
+            console.trace(err);
             this.fail(res, undefined, 'Internal server error');
         }
     }

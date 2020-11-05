@@ -26,7 +26,7 @@ export class Guard {
     if (argument === null || argument === undefined) {
       return Result.fail([`Must provide: ${argumentName}`]);
     } else {
-      return Result.ok();
+      return Result.ok(argument);
     }
   }
 
@@ -42,7 +42,7 @@ export class Guard {
     return Result.ok();
   }
 
-  public static optionalInput(value: any, defa: any): Result<any> {
+  public static optionalInput(value: any, defa: any): any {
     return this.againstNullOrUndefined(value, '').isSuccess ? value : defa;
   }
 
