@@ -5,7 +5,7 @@ import { TaskPersistenceDTO } from "./PersistenceDTO";
 import { TaskDTO } from "./TaskDTO";
 
 export class TaskMapper implements IMapper<Task, TaskDTO, TaskPersistenceDTO>{
-  toDomain: (rawData: TaskPersistenceDTO) => Promise<Task>;
+  toDomain: (rawData: TaskPersistenceDTO) => Task;
   toPersistence: (domain: Task) => TaskPersistenceDTO;
   public toDTO(domain: Task): TaskDTO {
     const taskMapped: TaskDTO = {

@@ -6,7 +6,7 @@
  * @argument P: PersistenceDTO
  */
 export interface IMapper<E, O, P> {
-    toDomain: (rawData: P) => Promise<E>;
+    toDomain: (rawData: P) => Promise<E> | E;
     toPersistence: (domain: E) => P;
     toDTO: (domain: E) => O;
 }
