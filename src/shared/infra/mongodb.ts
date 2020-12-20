@@ -14,6 +14,7 @@ export async function initMongoConnection({ host, port, user, password, database
   const con = await mongoose.connect(uriBuilt, {
     useUnifiedTopology: true, useNewUrlParser: true,
     useCreateIndex: true, useFindAndModify: false,
+    bufferCommands: false
   });
   return con;
 }

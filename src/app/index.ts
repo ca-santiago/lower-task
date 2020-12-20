@@ -4,7 +4,7 @@ import morgan from 'morgan';
 import { config } from 'dotenv';
 
 import APIRouter from '../router'
-import { initMongoConnection, MongoConnectionConf } from '../shared/core/mongodb';
+import { initMongoConnection, MongoConnectionConf } from '../shared/infra/mongodb';
 
 config();
 
@@ -13,14 +13,14 @@ app.set('port', process.env.PORT || 3003)
 
 let mongoConfig: MongoConnectionConf;
 
-if (process.env.NODE_ENV === 'dev') {
+if (process.env.NODE_ENV === 'DEV') {
     app.use(morgan('tiny'))
     mongoConfig = {
         database: process.env.DEV_MONGO_DBNAME,
         user: process.env.DEV_MONGO_USER,
         password: process.env.DEV_MONGO_PASSWORD,
         host: process.env.DEV_MONGO_HOST,
-        port: process.env.DEV_MONGO_POST
+        port: process.env.DEV_MONGO_PORT
     }
 } else {
     mongoConfig = {
@@ -28,14 +28,17 @@ if (process.env.NODE_ENV === 'dev') {
         user: process.env.MONGO_USER,
         password: process.env.MONGO_PASSWORD,
         host: process.env.MONGO_HOST,
-        port: process.env.MONGO_POST
+        port: process.env.MONGO_PORT
     }
 }
-Promise.resolve(() => {
-    initMongoConnection(mongoConfig);
-}).then(() => {
-    console.log('[DB] MongoDB connection started');
-})
+try {
+    (async () => {
+        await initMongoConnection(mongoConfig);
+        console.log('[DB] MongoDB connection started');
+    })()
+} catch (err) {
+    console.log('Could not connect to database');
+}
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())

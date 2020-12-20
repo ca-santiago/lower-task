@@ -64,4 +64,10 @@ export abstract class BaseController {
     public notFound(res: express.Response) {
         return BaseController.jsonResponse(res, 404);
     }
+    /**
+     * 
+     */
+    public Unavaliable(res: express.Response, error?: string[]) {
+        return BaseController.jsonResponse(res, 503, error);
+    }
 }

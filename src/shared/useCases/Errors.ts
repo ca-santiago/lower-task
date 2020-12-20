@@ -6,41 +6,31 @@ export namespace UseCasesErrors {
 
     export class InvalidParamError extends Result<any>{
         constructor(msg: string[]) {
-            super(
-                false,
-                msg,
-                null
-            );
+            super(false, msg, null);
         }
     }
 
     export class Unauthorized extends Result<any>{
         constructor() {
-            super(
-                false,
-                ['Unauthorized'],
-                null
-            );
+            super(false, ['Unauthorized'], null);
         }
     }
 
     export class InvalidCredentials extends Result<any>{
         constructor() {
-            super(
-                false,
-                ['Invalid credentials'],
-                null
-            );
+            super(false, ['Invalid credentials'], null);
         }
     }
 
     export class NotFound extends Result<any>{
         constructor() {
-            super(false,
-                ['Not found'],
-                null
-            );
+            super(false, ['Not found'], null);
         }
     }
 
+    export class DataBaseConnection extends Result<any>{
+        constructor() {
+            super(false, ['Database is down'], null)
+        }
+    }
 }

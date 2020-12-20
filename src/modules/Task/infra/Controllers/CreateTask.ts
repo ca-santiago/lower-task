@@ -1,7 +1,7 @@
 
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { BaseController } from "../../../../shared/infra/BaseController";
-import { CreateTaskUseCase } from '../../useCase/createTask/CreateTaskUseCase';
+import { CreateTaskUseCase } from '../../useCase/createTask/UseCase';
 import { CreateTaskDTO } from '../../useCase/createTask/DTO';
 import _ from 'lodash';
 import { UseCasesErrors } from '../../../../shared/useCases/Errors';
@@ -13,10 +13,8 @@ export class CreateTaskController extends BaseController {
   ) { super() }
 
   protected async executeImpl(req: express.Request, res: express.Response): Promise<any> {
-    // public async executeImpl(req: Request, res: Response): Promise<any> {
     const dto = req.body as CreateTaskDTO;
-    console.log(dto)
-    console.log(req.body)
+
     const bodyErrors: string[] = [];
     if (typeof dto.title !== 'string') {
       bodyErrors.push('invalid propertie: title');
@@ -28,12 +26,13 @@ export class CreateTaskController extends BaseController {
       return this.badRequest(res, bodyErrors);
     }
 
-
     const useCaseResult = await this.useCase.run(dto);
     if (useCaseResult.isSuccess === false) {
-      switch (useCaseResult.error.constructor) {
+      switch (useCaseResult.constructor) {
         case UseCasesErrors.InvalidParamError:
           return this.badRequest(res, useCaseResult.error);
+        case UseCasesErrors.DataBaseConnection:
+          return this.Unavaliable(res, useCaseResult.error);
         default:
           return this.fail(res);
       }

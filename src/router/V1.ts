@@ -1,9 +1,9 @@
 
 import { Router } from 'express'
-import TodoRouter from "../modules/todo/infra/Router";
+import TaskRouter from "../modules/Task/infra/Router";
 
 const RouterV1 = Router()
 
-RouterV1.use('/tasks', TodoRouter)
+RouterV1.use('/tasks', TaskRouter)
 
 export default RouterV1;

@@ -9,10 +9,15 @@ import moment from 'moment'
 import { TaskMapper } from "../../mapper/TaskMapper";
 import { TaskTitle } from "../../domain/Tittle";
 import { TaskContent } from "../../domain/Content";
+import { ITaskRepo } from "../../repository/ITaskRepo";
+import { EntityId } from "../../../../shared/domain/EntityId";
 
 export class CreateTaskUseCase implements IUseCase<CreateTaskDTO, Result<any>>{
 
-  constructor(private readonly mapper: TaskMapper) { }
+  constructor(
+    private readonly mapper: TaskMapper,
+    private readonly repo: ITaskRepo,
+  ) { }
 
   async run(request: CreateTaskDTO): Promise<Result<any>> {
     const titleOrError = Guard.againstNullOrUndefined(request.title, 'task title');
@@ -32,14 +37,20 @@ export class CreateTaskUseCase implements IUseCase<CreateTaskDTO, Result<any>>{
     if (combineResult.isSuccess === false)
       return new UseCasesErrors.InvalidParamError(combineResult.error);
 
+    const id = EntityId.new();
+
     const taskOrError = Task.create({
       title: titleInstanceOrError.getValue(),
       content: contentInstanceOrError.getValue(),
       createAt: moment().format()
-    })
+    }, id)
 
     if (taskOrError.isSuccess === false)
       return Result.fail(taskOrError.error);
+
+    const saveResult = await this.repo.save(taskOrError.getValue());
+    if (saveResult.isSuccess === false)
+      return new UseCasesErrors.DataBaseConnection();
 
     const mappedTask = this.mapper.toDTO(taskOrError.getValue());
     return Result.ok(mappedTask);
