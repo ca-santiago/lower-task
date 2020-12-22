@@ -3,10 +3,10 @@
     <i>The app you don't know that need till you use it. </i>
     <br/>
     <br/>
-    <a href="https://github.com/aromalanil/markItDown/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/grem-dev/lower-task?style=for-the-badge"></a>&nbsp;&nbsp;
-    <a href="https://github.com/aromalanil/markItDown/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/grem-dev/lower-task?style=for-the-badge"></a>&nbsp;&nbsp;
-    <a href="https://github.com/aromalanil/markItDown"><img alt="GitHub stars" src="https://img.shields.io/github/repo-size/grem-dev/lower-task?style=for-the-badge"></a>&nbsp;&nbsp;
-    <a href="https://github.com/aromalanil/markItDown/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/grem-dev/lower-task?style=for-the-badge"></a>
+    <a href="https://github.com/grem-dev/lower-task/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/grem-dev/lower-task?style=for-the-badge"></a>&nbsp;&nbsp;
+    <a href="https://github.com/grem-dev/lower-task/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/grem-dev/lower-task?style=for-the-badge"></a>&nbsp;&nbsp;
+    <a href="https://github.com/grem-dev/lower-task"><img alt="GitHub stars" src="https://img.shields.io/github/repo-size/grem-dev/lower-task?style=for-the-badge"></a>&nbsp;&nbsp;
+    <a href="https://github.com/grem-dev/lower-task/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/grem-dev/lower-task?style=for-the-badge"></a>
     <br/>
 </div>
 
