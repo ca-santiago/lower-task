@@ -2,7 +2,7 @@
 import { Request, Response, NextFunction } from 'express';
 
 export function VerifyHeaderToken(req: Request, res: Response, next: NextFunction) {
-    const tokenOrNull = analizeToken(req.headers['token']);
+    const tokenOrNull = analizeToken(req.headers['authorization'] || req.headers['Authorization'] || req.headers['token']);
     if (!tokenOrNull)
         res.status(401).end();
     else {

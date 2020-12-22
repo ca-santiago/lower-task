@@ -1,2 +1,2 @@
 
-require('./app')
+import './app' 
