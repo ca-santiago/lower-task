@@ -1,85 +1,64 @@
-# Lower Task
+<div align="center">
+    <h1>Lower Task</h1>
+    <i>The app you don't know that need till you use it. </i>
+    <br/>
+    <br/>
+    <a href="https://github.com/aromalanil/markItDown/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/grem-dev/lower-task?style=for-the-badge"></a>&nbsp;&nbsp;
+    <a href="https://github.com/aromalanil/markItDown/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/grem-dev/lower-task?style=for-the-badge"></a>&nbsp;&nbsp;
+    <a href="https://github.com/aromalanil/markItDown"><img alt="GitHub stars" src="https://img.shields.io/github/repo-size/grem-dev/lower-task?style=for-the-badge"></a>&nbsp;&nbsp;
+    <a href="https://github.com/aromalanil/markItDown/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/grem-dev/lower-task?style=for-the-badge"></a>
+    <br/>
+</div>
 
-Lower task is an Open source Task api aimed to basic CRUD actions. It is ideal for work with Frontend apps without need to build a simple backend app for network api consuming purpose.
+<br>
 
-[![made-with-python](https://img.shields.io/badge/NodeJs-v12.17.0-492.svg)](https://nodejs.org/en/) [![made-with-python](https://img.shields.io/badge/TypeScript-v4.0.5-49f.svg)](https://www.typescriptlang.org/) [![made-with-python](https://img.shields.io/badge/Made%20with-MongoDb-492.svg)](https://www.mongodb.com/en)
+| Author: [Carmen Santiago](https://grem-dev.github.io/grem.github.io/) |
+| --- |
 
-[@CarlosPascacio](https://github.com/CarlosPascacio)
-[@grem-dev](https://github.com/grem-dev)
 
-[![GitHub forks](https://img.shields.io/github/forks/grem-dev/lower-task.svg?style=social&label=Fork&maxAge=2592000)](https://GitHub.com/grem-dev/lower-task/network/) [![GitHub stars](https://img.shields.io/github/stars/grem-dev/lower-task.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/grem-dev/lower-task/stargazers/)
 
-[![forthebadge cc-nc-sa](http://ForTheBadge.com/images/badges/cc-nc-sa.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0)
 
-### Authorization
+## Clien App
+[![made-with-node](https://img.shields.io/badge/NodeJs-v12.17.0-492.svg)](https://nodejs.org/en/) [![made-with-react](https://img.shields.io/badge/React-v17.0.1-41aafb.svg)](https://reactjs.org/) 
 
-All the API request require the uso of an authorization token. You can get an authorization token via login into the app when have an account.
+[OpenReadme](./client/README.md)
 
-The authorization token should be placed on the headers of each request like this:
+## Backend app
+[![made-with-node](https://img.shields.io/badge/NodeJs-v12.17.0-492.svg)](https://nodejs.org/en/) [![made-with-typescript](https://img.shields.io/badge/TypeScript-v4.0.5-49f.svg)](https://www.typescriptlang.org/) [![made-with-mongodb](https://img.shields.io/badge/Made%20with-MongoDb-492.svg)](https://www.mongodb.com/en) [![made-with-python](https://img.shields.io/badge/Made%20with-Python-FFD343.svg)](https://www.python.org/)
 
-```http
-{
-    ...
-    headers:{
-        'Authorization': 'Bearer <Token string>'
-    }
-}
+[OpenReadme](./backend/readme.md)
+
+
+
+---
+| :warning: Inside client and backend there are the corresponding docker-compose.yml files to have up and running each app individualy :smile: |
+| ---|
+
+## Build
+Lowertask was built over diferent tecnologies in all the development spectrum. 
+
+### Build developtment
+
+**Before start:** Docker compose will attach a folder called `db` in the current directory. This does not exist, so you need to create it or you can change the attached directory in `mong-db: volumes`.
+
+Run docker compose dev file.
+
+```Bash
+    docker-compose -f docker-compose.dev.yml up -d
 ```
 
-#### Anotations
+Make sure to set the correct env variables on the `docker-compose.dev.yml` file. see `backend/.env.example`.
 
-`*` Required argument
-`host/api/v1` Base request
 
-## Tasks
+### Build production
 
-```http
-POST /tasks
-
-{
-    "content"
-    "title"
-}
+```sh
+    docker-compose -f docker-compose.yml up -d 
 ```
 
-| Parameter | Type     | Description      |
-| :-------- | :------- | :--------------- |
-| `title`   | `string` | ? Task's title   |
-| `content` | `string` | ? Task's content |
 
-You need provide at least title or content
-
-#### Status Codes
-
-| Status Code | Description             |
-| :---------- | :---------------------- |
-| 201         | `Created`               |
-| 400         | `Bad request`           |
-| 500         | `Internal server error` |
-| 401         | `Unauthorized`          |
-
-#### Get a task by its id
-
-```http
-GET /tasks/{task_id}
-```
-
-**Output example**
-
-```http
-{
-    "id": "TaskId",
-    "title": "Example title.",
-    "content":"Example content.",
-    "createdAt":"Date created"
-}
-```
-
-**Status Codes**
-
-| Status Code | Description             |
-| :---------- | :---------------------- |
-| 201         | `Created`               |
-| 404         | `Not found`             |
-| 500         | `Internal server error` |
-| 401         | `Unauthorized`          |
+## ToDo
+- [ ] Client app
+- [ ] Production docker compose file
+- [ ] Client readme
+- [ ] License 

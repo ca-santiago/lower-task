@@ -1,6 +1,5 @@
-import { Result } from "../core/Result";
-import { measureMemory } from "vm";
 
+import { Result } from "../core/Result";
 
 export namespace UseCasesErrors {
 

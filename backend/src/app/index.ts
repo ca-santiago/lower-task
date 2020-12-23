@@ -1,12 +1,9 @@
 
 import express from 'express';
-import morgan from 'morgan';
-import { config } from 'dotenv';
 
 import APIRouter from '../router'
 import { initMongoConnection, MongoConnectionConf } from '../shared/infra/mongodb';
 
-config();
 
 const app = express();
 app.set('port', process.env.PORT || 3003)
@@ -14,7 +11,11 @@ app.set('port', process.env.PORT || 3003)
 let mongoConfig: MongoConnectionConf;
 
 if (process.env.NODE_ENV === 'DEV') {
+    const dot = require('dotenv');
+    dot.config();
+    const morgan = require('morgan');
     app.use(morgan('tiny'))
+
     mongoConfig = {
         database: process.env.DEV_MONGO_DBNAME,
         user: process.env.DEV_MONGO_USER,
@@ -31,14 +32,14 @@ if (process.env.NODE_ENV === 'DEV') {
         port: process.env.MONGO_PORT
     }
 }
-try {
-    (async () => {
+(async () => {
+    try {
         await initMongoConnection(mongoConfig);
         console.log('[DB] MongoDB connection started');
-    })()
-} catch (err) {
-    console.log('Could not connect to database');
-}
+    } catch (err) {
+        console.log('Could not connect to database');
+    }
+})()
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
