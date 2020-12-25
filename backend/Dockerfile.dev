@@ -10,4 +10,4 @@ COPY ["./","./"]
 
 RUN mkdir file-storage
 
-CMD ["npm","run","dev"]
+CMD ["npm","run","dev:watch"]

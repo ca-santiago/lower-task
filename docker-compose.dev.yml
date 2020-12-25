@@ -1,11 +1,12 @@
-version: "3" # optional since v1.27.0
+version: "3"
 
 services:
   api:
     # build:
     #   context: ./backend
     #   dockerfile: Dockerfile.dev
-    image: lowertask-dev/backend
+    # image: lowertask-dev/backend
+    image: lowertask-devwatch/backend
     ports:
       - "5000:3001"
     depends_on:
@@ -18,6 +19,8 @@ services:
       - DEV_MONGO_DBNAME=taskapp
       - DEV_MONGO_USER=
       - DEV_MONGO_PASSWORD=
+    volumes:
+      - "./backend/src:/app/src"
   mongo-db:
     container_name: db
     image: mongo
