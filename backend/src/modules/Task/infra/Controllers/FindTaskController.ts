@@ -14,11 +14,11 @@ export class FindTaskByContentController extends BaseController {
 
     async executeImpl(req: express.Request, res: express.Response): Promise<any> {
 
-        if (req.body.match === undefined || typeof req.body.match !== 'string')
+        if (typeof req.query.q !== 'string')
             this.badRequest(res, ['Should provide match string']);
 
         const dto: FindTaskByContentDTO = {
-            match: req.body.match
+            match: req.query.q as string
         }
 
         const useCaseResult = await this.useCase.run(dto);
