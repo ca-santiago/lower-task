@@ -1,8 +1,6 @@
 
-
 export interface GetUserInfoDTO {
-    token: string;
-    userId?: string;
+    searchId: string;
+    userId: string;
     asPublic?: boolean;
 }
-

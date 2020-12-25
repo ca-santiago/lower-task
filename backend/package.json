@@ -6,8 +6,8 @@
   "scripts": {
     "start": "NODE_ENV=production && node build/index.js",
     "build": "rimraf ./build && tsc",
-    "dev": "ts-node ./src/",
-    "dev:watch": "nodemon -L",
+    "dev": "NODE_ENV=DEV ts-node ./src/",
+    "dev:watch": "NODE_ENV=DEV nodemon -L",
     "test": "mocha -r ts-node/register './src/test/**/*.spec.ts'"
   },
   "keywords": [

@@ -16,11 +16,11 @@ export class GetUserInfoController extends BaseController {
 
     async executeImpl(req: express.Request, res: express.Response) {
 
-        const { asPublic, id } = req.params;
+        const { asPublic, id, userId } = req.params;
         const dto: GetUserInfoDTO = {
-            token: req.headers['token'] as string,
+            userId,
             asPublic: !!asPublic,
-            userId: id
+            searchId: id
         }
         const useCaseResult = await this.useCase.run(dto);
 

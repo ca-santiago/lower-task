@@ -20,7 +20,6 @@ export class UploadProfilePictureUseCase implements IUseCase<UploadlPictureDTO, 
 
     constructor(
         private readonly userRepo: IUserRepository,
-        private readonly authService: IAuthService,
         private readonly mapper: UserMapper
     ) { }
 
@@ -29,14 +28,12 @@ export class UploadProfilePictureUseCase implements IUseCase<UploadlPictureDTO, 
         if (guardPictureResult.isSuccess === false)
             return new UseCasesErrors.InvalidParamError(guardPictureResult.error);
 
-        const decodeResult = await this.authService.decode(request.token);
+        const { userId } = request;
 
-        if (decodeResult.isSuccess === false)
-            return new UseCasesErrors.Unauthorized();
-
-        const user = await this.userRepo.getUserByUserId(decodeResult.getValue().userId);
+        const user = await this.userRepo.getUserByUserId(userId);
         if (!user)
             return new UseCasesErrors.Unauthorized();
+
         try {
 
             (async () => {
@@ -58,6 +55,7 @@ export class UploadProfilePictureUseCase implements IUseCase<UploadlPictureDTO, 
                 this.userRepo.save(this.mapper.toPersistence(user))
             })()
             return Result.ok();
+            
         } catch (err) {
             console.log(`[ServerError] ${err}`)
             return Result.fail(['500']);

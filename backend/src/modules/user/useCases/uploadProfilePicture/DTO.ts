@@ -2,5 +2,5 @@
 
 export interface UploadlPictureDTO {
     file: Buffer;
-    token: string;
+    userId: string;
 }

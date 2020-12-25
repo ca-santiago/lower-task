@@ -1,12 +1,18 @@
 
 import { Request, Response, NextFunction } from 'express';
+import { authService } from '../../../modules/user/services';
 
-export function VerifyHeaderToken(req: Request, res: Response, next: NextFunction) {
+
+export async function VerifyHeaderToken(req: Request, res: Response, next: NextFunction) {
     const tokenOrNull = analizeToken(req.headers['authorization'] || req.headers['Authorization'] || req.headers['token']);
     if (!tokenOrNull)
         res.status(401).end();
     else {
-        req.headers.token = tokenOrNull;
+        const payloadOrErorr = await authService.decode(tokenOrNull);
+        if (payloadOrErorr.isSuccess === false)
+            return res.status(401).send();
+
+        req.params.userId = payloadOrErorr.getValue().userId;
         next();
     }
 }

@@ -11,21 +11,10 @@ export class GetUsersProfileUseCase implements IUseCase<GetUsersProfileDTO, Resu
 
   constructor(
     private readonly userRepo: IUserRepository,
-    private readonly authService: IAuthService,
-    private readonly userMapper: UserMapper) { }
+    private readonly userMapper: UserMapper
+  ) { }
 
   async run(request: GetUsersProfileDTO): Promise<Result<any>> {
-    let userPayload;
-    try {
-      const payloadOrError = await this.authService.decode(request.token);
-      if (payloadOrError.isSuccess === false)
-        return new UseCasesErrors.Unauthorized();
-
-      userPayload = payloadOrError.getValue();
-
-    } catch (err) {
-      return Result.fail([err.message]);
-    }
 
     const userArr = await this.userRepo.getMany();
     const mappedUserArr = userArr.map(theUser => this.userMapper.toDTO(theUser));

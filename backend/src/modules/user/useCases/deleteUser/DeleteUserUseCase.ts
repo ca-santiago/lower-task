@@ -14,18 +14,14 @@ export class DeleteUser implements IUseCase<DeleteUserDTO, Result<any>>{
 
     constructor(
         private readonly repo: IUserRepository,
-        private readonly auth: IAuthService
     ) {
     }
 
     async run(request: DeleteUserDTO): Promise<Result<null>> {
-        const payloadOrError = await this.auth.decode(request.token);
-        if (payloadOrError.isSuccess === false)
-            return new UseCasesErrors.InvalidCredentials();
 
-        const payload: JWTPayload = payloadOrError.getValue();
+        const { userId } = request;
 
-        const idOrError = EntityId.from(payload.userId);
+        const idOrError = EntityId.from(userId);
         if (idOrError.isSuccess === false)
             return new UseCasesErrors.Unauthorized();
 

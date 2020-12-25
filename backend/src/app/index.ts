@@ -15,7 +15,6 @@ if (process.env.NODE_ENV === 'DEV') {
     dot.config();
     const morgan = require('morgan');
     app.use(morgan('tiny'))
-
     mongoConfig = {
         database: process.env.DEV_MONGO_DBNAME,
         user: process.env.DEV_MONGO_USER,
@@ -37,7 +36,8 @@ if (process.env.NODE_ENV === 'DEV') {
         await initMongoConnection(mongoConfig);
         console.log('[DB] MongoDB connection started');
     } catch (err) {
-        console.log('Could not connect to database');
+        console.error(`[DB] ${err.message}`)
+        console.log('[DB] Could not connect to database');
     }
 })()
 

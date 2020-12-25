@@ -20,7 +20,7 @@ export class UpdatePictureController extends BaseController {
 
         let dto: UploadlPictureDTO = {
             file: req.file.buffer,
-            token: req.headers['token'] as string
+            userId: req.params.userId,
         };
 
         const useCaseResul = await this.useCase.run(dto);

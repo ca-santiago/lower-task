@@ -16,19 +16,13 @@ export class GetUserInfoUseCase implements IUseCase<GetUserInfoDTO, Result<any>>
     constructor(
         private readonly repo: IUserRepository,
         private readonly mapper: UserMapper,
-        private readonly authService: IAuthService,
     ) { }
 
     async run(request: GetUserInfoDTO): Promise<Result<UserDTO>> {
-        const { token, userId, asPublic } = request;
+        const { searchId, userId, asPublic } = request;
         try {
 
-            const payloadOrError = await this.authService.decode(token);
-            if (payloadOrError.isSuccess === false)
-                return new UseCasesErrors.Unauthorized();
-
-            const user = await this.repo.getUserByUserId(
-                userId ? userId : payloadOrError.getValue().userId);
+            const user = await this.repo.getUserByUserId(searchId);
 
             if (!user)
                 return new UseCasesErrors.NotFound();
