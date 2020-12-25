@@ -1,10 +1,10 @@
+
 import { Result } from "../../../../shared/core/Result";
 import { EntityId } from "../../../../shared/domain/EntityId";
 import { Task } from "../../domain/Task";
-import { TaskPersistenceDTO } from "../../mapper/PersistenceDTO";
 import { TaskMapper } from "../../mapper/TaskMapper";
 import { ITaskRepo } from "../ITaskRepo";
-import TaskModel from './model'
+import { TaskModel } from './model'
 
 export class MongooseTaskRepo implements ITaskRepo {
 

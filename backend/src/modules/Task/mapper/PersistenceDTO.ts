@@ -5,5 +5,6 @@ export interface TaskPersistenceDTO {
   title: string;
   content: Nullable<string>;
   createdAt: string;
-  id: string;
+  _id: string;
+  owner: string;
 }

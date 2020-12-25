@@ -21,6 +21,10 @@ export class Task extends AggregateRoot<TaskProps>{
     return this.props.createAt;
   }
 
+  get owner(): EntityId{
+    return this.props.owner;
+  }
+
   private constructor(props: TaskProps, id: EntityId) {
     super(props, id)
   }
