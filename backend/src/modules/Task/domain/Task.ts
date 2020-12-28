@@ -21,7 +21,7 @@ export class Task extends AggregateRoot<TaskProps>{
     return this.props.createAt;
   }
 
-  get owner(): EntityId{
+  get owner(): EntityId {
     return this.props.owner;
   }
 
@@ -29,12 +29,14 @@ export class Task extends AggregateRoot<TaskProps>{
     super(props, id)
   }
 
-  public updateTitle(t: TaskTitle) {
+  public updateTitle(t: TaskTitle): Result<any> {
     this.props.title = t;
+    return Result.ok();
   }
 
-  public updateContent(c: Nullable<TaskContent>) {
+  public updateContent(c: Nullable<TaskContent>): Result<any> {
     this.props.content = c;
+    return Result.ok();
   }
 
   public static create(props: TaskProps, id: EntityId): Result<Task> {

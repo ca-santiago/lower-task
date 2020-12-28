@@ -6,6 +6,7 @@ import { Task } from "../domain/Task";
 
 export interface ITaskRepo {
   exist(id: string): Promise<boolean>;
+  findById(id: EntityId): Promise<Task | null>;
   save(t: Task): Promise<Result<any>>;
   delete(id: EntityId): Promise<void>;
   findByTitleOrContent(regex: string): Promise<Task[]>;

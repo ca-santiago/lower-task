@@ -1,5 +1,7 @@
 
-import express, { Request, Response, response } from 'express';
+import express, { Request, Response } from 'express';
+import { Result } from '../core/Result';
+import { UseCasesErrors } from '../useCases/Errors';
 
 
 export abstract class BaseController {
@@ -76,5 +78,22 @@ export abstract class BaseController {
      */
     public accepted(res: express.Response) {
         return BaseController.jsonResponse(res, 202);
+    }
+
+    public handleCommonResponse(res: express.Response, result: Result<any>): Result<any> | null {
+        switch (result.constructor) {
+            case UseCasesErrors.InvalidParamError:
+                this.badRequest(res, result.error);
+                return null;
+            case UseCasesErrors.Conflict:
+                this.conflict(res, result.error);
+                return null
+            case UseCasesErrors.InvalidParamError:
+
+                return null;
+            case UseCasesErrors.InvalidParamError:
+                return null;
+        }
+        return result;
     }
 }

@@ -38,4 +38,12 @@ export class MongooseTaskRepo implements ITaskRepo {
     return mappedTask;
   }
 
+  async findById(id: EntityId): Promise<Task | null> {
+    const res = await TaskModel.findOne({ _id: id.value });
+    if (!res)
+      return null;
+    const mapped = this.mapper.toDomain(res);
+    return mapped;
+  }
+
 }

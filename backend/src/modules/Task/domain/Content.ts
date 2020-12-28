@@ -14,7 +14,6 @@ export class TaskContent extends ValueObject<TaskContentProps>{
   public static create(props: TaskContentProps): Result<TaskContent> {
     if (props.value.length > TaskContent.maxTaskContentLenght)
       return Result.fail(['Invalid task content lenght'])
-
     return Result.ok(
       new TaskContent(props)
     )

@@ -9,6 +9,10 @@ export class TaskTitle extends ValueObject<TaskTitleProps> {
 
   public static readonly maxTitleLenght = 240;
 
+  get value(): string {
+    return this.props.value;
+  }
+
   private constructor(props: TaskTitleProps) {
     super(props);
   }

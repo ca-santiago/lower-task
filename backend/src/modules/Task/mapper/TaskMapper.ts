@@ -27,7 +27,7 @@ export class TaskMapper implements IMapper<Task, TaskDTO, TaskPersistenceDTO>{
       content: domain.content.props.value,
       createdAt: domain.createAt,
       _id: domain.id.value, owner: domain.owner.value,
-      title: domain.title.props.value,
+      title: domain.title.value,
     }
     return out;
   }

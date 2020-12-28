@@ -32,4 +32,10 @@ export namespace UseCasesErrors {
             super(false, ['Database is down'], null)
         }
     }
+
+    export class Conflict extends Result<any>{
+        constructor(errors: string[]) {
+            super(false, errors, null)
+        }
+    }
 }
