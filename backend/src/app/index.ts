@@ -1,5 +1,6 @@
 
 import express from 'express';
+import cors from 'cors';
 
 import APIRouter from '../router'
 import { initMongoConnection, MongoConnectionConf } from '../shared/infra/mongodb';
@@ -43,6 +44,7 @@ if (process.env.NODE_ENV === 'DEV') {
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(cors())
 
 app.use('/api/v1', APIRouter.v1)
 
