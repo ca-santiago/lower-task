@@ -10,7 +10,7 @@ export const authService = {
 }
 
 
-function SignIn({ email, password }) {
+async function SignIn({ email, password }) {
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

@@ -7,6 +7,6 @@ export const TaskAPI = {
 
 export const AuthAPI = {
   PROTOCOL: 'http',
-  HOST: '192.168.43.204',
+  HOST: 'localhost',
   PORT: 3001,
 }
