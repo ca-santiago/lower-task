@@ -14,8 +14,8 @@ export class FindTaskByContentController extends BaseController {
 
     async executeImpl(req: express.Request, res: express.Response): Promise<any> {
 
-        if (typeof req.query.q !== 'string')
-            this.badRequest(res, ['Should provide match string']);
+        if (typeof req.query.q !== 'string' || req.query.q === '')
+            return this.badRequest(res, ['Should provide match string']);
 
         const dto: FindTaskByContentDTO = {
             match: req.query.q as string
