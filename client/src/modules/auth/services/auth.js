@@ -1,6 +1,9 @@
 
 import { AuthAPI } from "../../../shared/config/API"
 
+const portOrBlank = AuthAPI.PORT && `:${AuthAPI.PORT}`
+const baseURL = `${AuthAPI.PROTOCOL}://${AuthAPI.HOST}${portOrBlank}/api/v1`
+
 export const authService = {
   SignIn,
   SignUp
@@ -13,7 +16,8 @@ function SignIn({ email, password }) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password })
   }
-  return fetch(`http://localhost:3003/api/v1/users/login`, options)
+  console.log('Pre to fetch 2')
+  return fetch(`${baseURL}/users/login`, options)
     .then(handleResponse);
 }
 
@@ -27,14 +31,17 @@ async function SignUp({ username, password, email }) {
     body: JSON.stringify({ username, password, email })
   }
 
-  return fetch(`${AuthAPI.URL}/api/v1/users`, options)
+  return fetch(`${baseURL}/users`, options).then(handleResponse)
 }
 
 function handleResponse(res) {
+
+  console.log('[Handler]')
+  console.log(res)
+
   if (res.status === 200) {
     return res.json();
   }
-
   if (res.status === 400) {
     return res.json().then(data => {
       return Promise.reject({ status: res.status, errors: data.errors })

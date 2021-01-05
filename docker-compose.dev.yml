@@ -5,14 +5,14 @@ services:
     # build:
     #   context: ./backend
     #   dockerfile: Dockerfile.dev
-    # image: lowertask-dev/backend
-    image: lowertask-devwatch/backend
+    image: lowertask-dev/backend
+    container_name: api
     ports:
-      - "5000:3001"
+      - "5001:5000"
     depends_on:
       - mongo-db
     environment:
-      - PORT=3001
+      - PORT=5000
       - NODE_ENV=DEV
       - DEV_MONGO_PORT=27017
       - DEV_MONGO_HOST=db
@@ -21,6 +21,15 @@ services:
       - DEV_MONGO_PASSWORD=
     volumes:
       - "./backend/src:/app/src"
+  client:
+    # build:
+    #   context: ./client
+    #   dockerfile: Dockerfile.dev
+    image: lowertask-dev/client
+    ports:
+      - 3001:3000
+    volumes:
+      - "./client/src:/app/src"
   mongo-db:
     container_name: db
     image: mongo

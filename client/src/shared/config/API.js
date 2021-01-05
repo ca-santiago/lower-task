@@ -2,13 +2,11 @@
 export const TaskAPI = {
   PROTOCOL: 'http',
   HOST: 'localhost',
-  PORT: 3000,
-  URL: `http://localhost`
+  PORT: 3001,
 }
 
 export const AuthAPI = {
   PROTOCOL: 'http',
-  HOST: 'localhost',
-  PORT: 3000,
-  URL: `http://localhost`
+  HOST: '192.168.43.204',
+  PORT: 3001,
 }

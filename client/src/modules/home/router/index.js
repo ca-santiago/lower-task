@@ -8,17 +8,13 @@ function HomeRouter(props) {
 
   const { user } = props.authentication;
 
-  useEffect(() => {
-    // console.log(props)
-  }, [])
-
   function _clickLogOut() {
     props.signout();
   }
 
   return (
     <div>
-      <h3>Welcome {user.name.first} {user.name.last}</h3>
+      <h3>Welcome {user.name?.first} {user.name?.last}</h3>
       <button onClick={_clickLogOut}>SignOut</button>
     </div>
   )
