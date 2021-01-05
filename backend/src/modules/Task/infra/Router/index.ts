@@ -1,7 +1,10 @@
 
 import { Router } from 'express'
 import { VerifyHeaderToken } from '../../../../shared/infra/middlewares/verifyBearerToken';
-import { createTaskController, delteTaskController, findTaskByContentController, updateTaskController } from '../Controllers';
+import { 
+   createTaskController, delteTaskController, findTaskByContentController,
+   updateTaskController, getTasksByOwnerController
+} from '../Controllers';
 
 const TaskRouter = Router();
 
@@ -23,6 +26,11 @@ TaskRouter.delete('/:id',
 TaskRouter.put('/:id',
     VerifyHeaderToken,
     (req, res) => updateTaskController.execute(req, res)
+)
+
+TaskRouter.get('/owner/:id',
+    VerifyHeaderToken,
+    (req, res) => getTasksByOwnerController.execute(req, res)
 )
 
 export default TaskRouter;

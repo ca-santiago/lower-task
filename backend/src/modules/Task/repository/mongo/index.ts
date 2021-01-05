@@ -46,4 +46,10 @@ export class MongooseTaskRepo implements ITaskRepo {
     return mapped;
   }
 
+  async findByOwner(ownerId: string): Promise<Task[]> {
+    let out: Task[];
+    const res = await TaskModel.find({ owner: ownerId }).exec();
+    out = res.map(theTask => this.mapper.toDomain(theTask))
+    return out;
+  }
 }

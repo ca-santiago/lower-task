@@ -10,4 +10,5 @@ export interface ITaskRepo {
   save(t: Task): Promise<Result<any>>;
   delete(id: EntityId): Promise<void>;
   findByTitleOrContent(regex: string): Promise<Task[]>;
+  findByOwner(ownerId: string): Promise<Task[]>;
 }
