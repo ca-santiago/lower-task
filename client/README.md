@@ -23,6 +23,20 @@ To run the development version just use the dev file `docker-compose.dev.yml`
 Or install the dependencies locally and run the app with npm
 ```sh
 $ npm i
-$ npm run dev
+$ npm start
 ```
 Make sure to have the `.env` file with the corresponding credentials. See `.env.example` as guide. Same fo the docker-compose file.
+
+# TODO
+
+- [ ] Styling
+
+**Tasks**
+-
+- [ ] Create task panel
+- [ ] Delete task
+- [ ] Update Task
+
+**Sessions**
+- [ ] Multi sessions
+- [ ] Account information panel
