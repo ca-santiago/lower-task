@@ -1,7 +1,8 @@
 
-import react, { useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { authActions } from '../actions';
+import { AuthContext } from '../helpers';
 
 function SignInScreen(props) {
   const { signin } = props;
@@ -47,5 +48,5 @@ const actionCreators = {
   signout: authActions.SignOut,
 }
 
-const mappedScreen = connect(mapState, actionCreators)(SignInScreen);
+const mappedScreen = connect(mapState, actionCreators, null, { context: AuthContext })(SignInScreen);
 export { mappedScreen as SignInScreen }

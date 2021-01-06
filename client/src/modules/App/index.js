@@ -1,25 +1,18 @@
 
-import react from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import { AppRouter } from './router';
 
-function App(props) {
+import { Provider } from 'react-redux';
+import { AuthStore, AuthContext } from '../auth/helpers';
 
+function App() {
   return (
     <>
-      <pre>{JSON.stringify(props.auth)}</pre>
-      <AppRouter />
+      <Provider store={AuthStore} context={AuthContext} >
+        <AppRouter />
+      </Provider>
     </>
   );
 }
 
-
-
-function mapState(state) {
-  return {
-    auth: state.authentication
-  };
-}
-
-const connectedApp = connect(mapState, {})(App);
-export { connectedApp as App };
+export { App };

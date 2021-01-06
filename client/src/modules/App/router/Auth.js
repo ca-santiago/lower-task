@@ -1,11 +1,11 @@
 
-import react, { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { Switch, Route, Redirect, Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
 import { SignInScreen } from '../../auth/screens'
 
-export function AuthRouter(props) {
+export function AuthRouter() {
 
   const history = useCallback(() => {
     return createBrowserHistory();

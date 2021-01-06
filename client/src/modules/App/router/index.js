@@ -1,16 +1,12 @@
 
-import react, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import { MainRouter } from './Main'
 import { AuthRouter } from './Auth'
+import { AuthContext } from '../../auth/helpers';
 
 function AppRouter(props) {
-
-  useEffect(() => {
-    console.log(props)
-  })
-
   return (
     <>
       {
@@ -25,5 +21,5 @@ function AppRouter(props) {
 
 const mapState = (state) => state;
 
-const connectedAppRouter = connect(mapState, {})(AppRouter);
+const connectedAppRouter = connect(mapState, {}, null, { context: AuthContext })(AppRouter);
 export { connectedAppRouter as AppRouter }
