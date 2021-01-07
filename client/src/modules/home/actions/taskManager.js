@@ -1,9 +1,9 @@
 
 import { TaskManagerConstants } from '../reducers/taskManager';
-import { fetchTasksFromUser } from '../services'
+import { fetchTasksFromUser, createTask } from '../services'
 
 export const taskManagerActions = {
-  fetchTasks
+  fetchTasks, createNewTask
 }
 
 
@@ -23,5 +23,22 @@ function fetchTasks(userId, token) {
 
         dispatch({ type: TaskManagerConstants.FETCH_TASKS_FAIL, errors: err });
       });
+  }
+}
+
+
+function createNewTask(title, content, token) {
+  return dispatch => {
+    dispatch({ type: TaskManagerConstants.CREATE_TASK_REQUEST });
+
+    return createTask(title, content, token)
+      .then(data => {
+        console.log(data);
+        dispatch({ type: TaskManagerConstants.CREATE_TASK_SUCCEEDED, data });
+      })
+      .catch(err => {
+        // TODO: Save the task on the draft memory.
+        dispatch({ type: TaskManagerConstants.CREATE_TASK_FAIL, errors: ['No sé pudo crear el ToDo, intentelo más tarde.'] });
+      })
   }
 }

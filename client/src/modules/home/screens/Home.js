@@ -9,52 +9,84 @@ import { authActions } from '../../auth/actions';
 import { AuthContext } from '../../auth/helpers';
 import { taskManagerActions } from '../actions';
 
+
+// React Bootstrap
+import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Alert from 'react-bootstrap/Alert';
+
+
+// Components
+import { CreateTaskPanel } from '../components'
+
 function HomeScreen(props) {
 
   // Destructurin methods
   const { fetchTasks } = props;
   const { user } = props.authentication;
-  const { fetching, tasks } = props.taskManager;
+  const { fetching, tasks, nextPage, currPage } = props.taskManager;
 
   useEffect(() => {
     if (!fetching) {
-      fetchTasks(user.id, user.token);
+      fetchTasks(user.id, user.token, nextPage);
     }
-  }, [user]);
+  }, []);
 
-  function _clickLogOut() {
+  function _clickSignOut() {
     props.signout();
   }
 
-  function _renderTask(taskData, index) {
-    console.log(taskData, index)
-    const time = new Date(taskData.createAt);
-    return (
-      <div key={taskData.id}>
-        <p key={index}>
-          {taskData.title}
-        </p>
-        <p>
-          {taskData.content}
-        </p>
-        <p>Creado: {time.toLocaleDateString()}</p>
-      </div>
-    )
-  }
 
   return (
     <div>
       <h3>Welcome {user.name?.first} {user.name?.last}</h3>
-      <button onClick={_clickLogOut}>SignOut</button>
-      {
-        (tasks.length > 0) ?
-          tasks.map(_renderTask)
-          :
-          fetching ? <p>Loading...</p> : <p>No tasks yet, write your first one</p>
-      }
+      <button onClick={_clickSignOut}>SignOut</button>
+      <Container>
+        <Row>
+          <Col xl={4} >
+            <CreateTaskPanel token={user.token} />
+            {
+              (tasks.length > 0) ?
+                tasks.map(RenderTaskCard)
+                :
+                fetching ? <p>Loading...</p> : <p>No tasks yet, write your first one</p>
+            }
+          </Col>
+          <Col xl={8} >
+            <Row>
+              <p>Contenido random</p>
+            </Row>
+          </Col>
+        </Row>
+      </Container>
     </div>
   )
 }
+
+
+function RenderTaskCard(taskData, index) {
+  const time = new Date(taskData.createAt);
+  return (
+    <div key={taskData.id}>
+      <Card>
+        <Card.Body>
+          <Card.Title>
+            {taskData.title}
+          </Card.Title>
+          <Card.Text>
+            {taskData.content}
+          </Card.Text>
+        </Card.Body>
+        <Card.Footer>Creado: {time.toLocaleDateString()}</Card.Footer>
+      </Card>
+      <br />
+    </div>
+  )
+}
+
+
 
 const mapState = (state) => state;
 
