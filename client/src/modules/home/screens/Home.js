@@ -66,18 +66,14 @@ function HomeScreen(props) {
 }
 
 
-function RenderTaskCard(taskData, index) {
+function RenderTaskCard(taskData) {
   const time = new Date(taskData.createAt);
   return (
     <div key={taskData.id}>
       <Card>
         <Card.Body>
-          <Card.Title>
-            {taskData.title}
-          </Card.Title>
-          <Card.Text>
-            {taskData.content}
-          </Card.Text>
+          {taskData.title && <Card.Title>{taskData.title}</Card.Title>}
+          {taskData.content && <Card.Text>{taskData.content}</Card.Text>}
         </Card.Body>
         <Card.Footer>Creado: {time.toLocaleDateString()}</Card.Footer>
       </Card>
