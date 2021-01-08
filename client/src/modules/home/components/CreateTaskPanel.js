@@ -20,9 +20,14 @@ function CreateTaskPanel(props) {
     if (!title && !content)
       return setErr(_ => 'Introduzca titulo o contenido');
 
-    setErr('');
-
+    _resetState();
     props.createTask(title, content, props.token);
+  }
+
+  function _resetState() {
+    setErr('');
+    setTitle('')
+    setContent('');
   }
 
 
@@ -33,9 +38,9 @@ function CreateTaskPanel(props) {
         <Form.Group>
           {err && <Alert variant='danger'> {err} </Alert>}
           {errors.map((theErr, i) => <Alert key={i} variant='danger'>{theErr}</Alert>)}
-          <Form.Control onChange={e => setTitle(e.currentTarget.value)} type="text" placeholder='What is on your mind' />
+          <Form.Control value={title} onChange={e => setTitle(e.currentTarget.value)} type="text" placeholder='What is on your mind' />
           <br />
-          <Form.Control onChange={e => setContent(e.currentTarget.value)} as="textarea" placeholder='Describe your idea' rows={3} />
+          <Form.Control value={content} onChange={e => setContent(e.currentTarget.value)} as="textarea" placeholder='Describe your idea' rows={3} />
           <br />
           <Form.Control type="submit" value="Crear" />
         </Form.Group>
