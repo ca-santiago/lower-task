@@ -30,10 +30,8 @@ function fetchTasks(userId, token) {
 function createNewTask(title, content, token) {
   return dispatch => {
     dispatch({ type: TaskManagerConstants.CREATE_TASK_REQUEST });
-
     return createTask(title, content, token)
       .then(data => {
-        console.log(data);
         dispatch({ type: TaskManagerConstants.CREATE_TASK_SUCCEEDED, data });
       })
       .catch(err => {

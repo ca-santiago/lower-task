@@ -1,12 +1,8 @@
 
 export const TaskAPI = {
-  PROTOCOL: 'http',
-  HOST: 'localhost',
-  PORT: 3001,
+  URL: process.env.REACT_APP_TASK_API_KEY
 }
 
 export const AuthAPI = {
-  PROTOCOL: 'http',
-  HOST: 'localhost',
-  PORT: 3001,
+  URL: process.env.REACT_APP_AUTH_API_KEY
 }

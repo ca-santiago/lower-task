@@ -1,7 +1,6 @@
 import { TaskAPI } from "../../../shared/config/API"
 
-const portOrEmpty = TaskAPI.PORT && `:${TaskAPI.PORT}`
-const baseURL = `${TaskAPI.PROTOCOL}://${TaskAPI.HOST}${portOrEmpty}/api/v1/tasks`
+const baseURL = `${TaskAPI.URL}/api/v1/tasks`
 
 export {
   fetchTasksFromUser,
@@ -38,8 +37,8 @@ function createTask(title, content, token) {
 
 
 function handleResponse(res) {
-  console.log('[Handler]')
-  console.log(res)
+  // console.log('[Handler]')
+  // console.log(res)
   if (res.status === 200) {
     return res.json();
   }
@@ -54,5 +53,5 @@ function handleResponse(res) {
 
   if (res.status === 500)
     return Promise.reject({ status: res.status });
-  
+
 }

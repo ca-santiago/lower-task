@@ -1,8 +1,7 @@
 
 import { AuthAPI } from "../../../shared/config/API"
 
-const portOrBlank = AuthAPI.PORT && `:${AuthAPI.PORT}`
-const baseURL = `${AuthAPI.PROTOCOL}://${AuthAPI.HOST}${portOrBlank}/api/v1`
+const baseURL = `${AuthAPI.URL}/api/v1`
 
 export const authService = {
   SignIn,
@@ -35,10 +34,8 @@ async function SignUp({ username, password, email }) {
 }
 
 function handleResponse(res) {
-
-  console.log('[Handler]')
-  console.log(res)
-
+  // console.log('[Handler]')
+  // console.log(res)
   if (res.status === 200) {
     return res.json();
   }

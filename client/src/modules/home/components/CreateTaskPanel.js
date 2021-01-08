@@ -15,10 +15,6 @@ function CreateTaskPanel(props) {
   const [content, setContent] = useState('');
   const [tags, setTags] = useState('');
 
-  useEffect(() => {
-    console.log(props)
-  }, []);
-
   function _onSubmit(e) {
     e.preventDefault();
     if (!title && !content)

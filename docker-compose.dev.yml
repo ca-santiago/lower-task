@@ -28,6 +28,9 @@ services:
     image: lowertask-dev/client
     ports:
       - 3001:3000
+    environment:
+      - REACT_APP_TASK_API_KEY=http://localhost:5001
+      - REACT_APP_AUTH_API_KEY=http://localhost:5001
     volumes:
       - "./client/src:/app/src"
   mongo-db:
