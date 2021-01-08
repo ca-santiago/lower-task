@@ -21,13 +21,13 @@ export class CreateTaskUseCase implements IUseCase<CreateTaskDTO, Result<any>>{
   ) { }
 
   async run(request: CreateTaskDTO): Promise<Result<any>> {
-    const titleOrError = Guard.againstNullOrUndefined(request.title, 'task title');
+    const titleOrDefault = Guard.optionalInput(request.title, '');
     const contentOrDefault = Guard.optionalInput(request.content, '')
 
-    if (titleOrError.isSuccess === false)
-      return new UseCasesErrors.InvalidParamError(titleOrError.error);
+    if (!titleOrDefault && !contentOrDefault)
+      return new UseCasesErrors.Conflict(['Should provide title or content']);
 
-    const titleInstanceOrError = TaskTitle.create({ value: titleOrError.getValue() })
+    const titleInstanceOrError = TaskTitle.create({ value: titleOrDefault })
     const contentInstanceOrError = TaskContent.create({ value: contentOrDefault });
 
     const combineResult = Result.combine([
