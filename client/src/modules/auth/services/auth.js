@@ -10,6 +10,9 @@ export const authService = {
 
 
 async function SignIn({ email, password }) {
+  console.log(process.env)
+  console.log('[baseURL]')
+  console.log(baseURL)
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

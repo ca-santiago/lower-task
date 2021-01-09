@@ -20,6 +20,6 @@ COPY ["package*.json", "./"]
 
 RUN npm install --prod 
 
-COPY --from=build ["/app/build","./build"]
+COPY --from=build ["/app/build","./app/build"]
 
 CMD ["npm","start"]
