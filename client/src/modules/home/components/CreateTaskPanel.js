@@ -1,8 +1,8 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { Container, Form, Alert } from 'react-bootstrap';
+import { Form, Alert } from 'react-bootstrap';
 
 import { taskManagerActions } from '../actions';
 import { TaskManagerContext } from '../helpers';
@@ -13,7 +13,7 @@ function CreateTaskPanel(props) {
   const [err, setErr] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [tags, setTags] = useState('');
+  // const [tags, setTags] = useState('');
 
   function _onSubmit(e) {
     e.preventDefault();
@@ -30,22 +30,18 @@ function CreateTaskPanel(props) {
     setContent('');
   }
 
-
   return (
-    <Container>
-      <p>Header ready</p>
-      <Form onSubmit={_onSubmit}>
-        <Form.Group>
-          {err && <Alert variant='danger'> {err} </Alert>}
-          {errors.map((theErr, i) => <Alert key={i} variant='danger'>{theErr}</Alert>)}
-          <Form.Control value={title} onChange={e => setTitle(e.currentTarget.value)} type="text" placeholder='What is on your mind' />
-          <br />
-          <Form.Control value={content} onChange={e => setContent(e.currentTarget.value)} as="textarea" placeholder='Describe your idea' rows={3} />
-          <br />
-          <Form.Control type="submit" value="Crear" />
-        </Form.Group>
-      </Form>
-    </Container>
+    <Form onSubmit={_onSubmit}>
+      <Form.Group>
+        {err && <Alert variant='danger'> {err} </Alert>}
+        {errors.map((theErr, i) => <Alert key={i} variant='danger'>{theErr}</Alert>)}
+        <Form.Control value={title} onChange={e => setTitle(e.currentTarget.value)} type="text" placeholder='What is on your mind' />
+        <br />
+        <Form.Control value={content} onChange={e => setContent(e.currentTarget.value)} as="textarea" placeholder='Describe your idea' rows={3} />
+        <br />
+        <Form.Control type="submit" value="Crear" />
+      </Form.Group>
+    </Form>
   )
 }
 
