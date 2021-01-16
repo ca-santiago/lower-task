@@ -13,8 +13,10 @@ export class FindTaskByContentUseCase implements IUseCase<FindTaskByContentDTO, 
     ) { }
 
     async run(request: FindTaskByContentDTO): Promise<Result<any>> {
-
-        const findResult = await this.repo.findByTitleOrContent(request.match);
+				const options = {
+					ownerId: request.user_id,
+				}
+        const findResult = await this.repo.findByTitleOrContent(request.match, options);
 
         const res = findResult.map(theTask => this.mapper.toDTO(theTask))
 
@@ -22,3 +24,4 @@ export class FindTaskByContentUseCase implements IUseCase<FindTaskByContentDTO, 
     }
 
 }   
+

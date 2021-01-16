@@ -18,7 +18,8 @@ export class FindTaskByContentController extends BaseController {
             return this.badRequest(res, ['Should provide match string']);
 
         const dto: FindTaskByContentDTO = {
-            match: req.query.q as string
+            match: req.query.q as string,
+						user_id: req.params.userId
         }
 
         const useCaseResult = await this.useCase.run(dto);

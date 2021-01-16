@@ -3,7 +3,7 @@ import { Result } from "../../../../shared/core/Result";
 import { EntityId } from "../../../../shared/domain/EntityId";
 import { Task } from "../../domain/Task";
 import { TaskMapper } from "../../mapper/TaskMapper";
-import { ITaskRepo } from "../ITaskRepo";
+import { ITaskRepo , FindByTitleOrContentOptions } from "../ITaskRepo";
 import { TaskModel } from './model'
 
 export class MongooseTaskRepo implements ITaskRepo {
@@ -31,9 +31,9 @@ export class MongooseTaskRepo implements ITaskRepo {
     return
   }
 
-  async findByTitleOrContent(regex: string): Promise<Task[]> {
+  async findByTitleOrContent(regex: string, options: FindByTitleOrContentOptions): Promise<Task[]> {
     const RE = new RegExp(regex, 'i');
-    const results = await TaskModel.find({ $or: [{ title: RE }, { content: RE }] }).exec()
+    const results = await TaskModel.find({ $or: [{ title: RE }, { content: RE }], $and: [{owner: options.ownerId}] }).exec()
     const mappedTask = results.map(theTask => this.mapper.toDomain(theTask));
     return mappedTask;
   }
