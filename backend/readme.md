@@ -103,10 +103,11 @@ GET /tasks/{task_id}
 | 401         | `Unauthorized`          |
 
 ---
-
+# Hitos
 ## ToDo
-- [ ] Workspaces
-- [ ] Messaging
+- [ ] Workspaces*
 - [ ] Colaborators
-- [ ] Share tasks
-- [ ] ...   
+- [ ] ~Share tasks~
+## Reading traker
+- [ ] System base
+

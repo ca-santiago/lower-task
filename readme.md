@@ -58,7 +58,15 @@ Make sure to set the correct env variables on the `docker-compose.dev.yml` file.
 
 
 ## ToDo
-- [x] Client app
 - [ ] Production docker compose file
-- [x] Client readme
 - [ ] License 
+- [ ] API documentation*
+
+## Hitos
+
+### Reading traker
+- [ ] System base
+### ToDo app
+- [x] System base
+- [ ] Workspaces extension
+
