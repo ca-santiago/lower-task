@@ -33,9 +33,9 @@ export class UpdateTaskUseCase implements IUseCase<UpdateTaskDTO, Result<any>>{
 
         // finding
         const TaskOrError = await this.taskRepo.findById(taskIdOrError.getValue());
-        if (!taskIdOrError)
+        if (!TaskOrError)
             return new UseCasesErrors.NotFound();
-
+			
         // Validate task owner or have permisions
         if (TaskOrError.id.value !== userId)
             return new UseCasesErrors.Unauthorized();
