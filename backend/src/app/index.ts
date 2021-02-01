@@ -1,6 +1,8 @@
 
 import express from 'express';
 import cors from 'cors';
+const dot = require('dotenv');
+dot.config();
 
 import APIRouter from '../router'
 import { initMongoConnection, MongoConnectionConf } from '../shared/infra/mongodb';
@@ -12,8 +14,6 @@ app.set('port', process.env.PORT || 3003)
 let mongoConfig: MongoConnectionConf;
 
 if (process.env.NODE_ENV === 'DEV') {
-    const dot = require('dotenv');
-    dot.config();
     const morgan = require('morgan');
     app.use(morgan('tiny'))
     mongoConfig = {
