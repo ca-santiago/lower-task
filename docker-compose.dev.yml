@@ -19,20 +19,23 @@ services:
       - DEV_MONGO_DBNAME=taskapp
       - DEV_MONGO_USER=
       - DEV_MONGO_PASSWORD=
-      - FILE_STORAGE_NAME=lower-task-image-bucket
-      - FILE_STORAGE_ENDPOINT=http://object-storage:9000
+      - FILE_STORAGE_NAME=lower-task-image-bucket 
+      - FILE_STORAGE_ENDPOINT=http://minio:9000
       - FILE_STORAGE_ACCESS_KEY=minioadmin
       - FILE_STORAGE_SECRET_ACCESS=minioadmin
     volumes:
       - "./backend/src:/app/src"
   object-storage:
     image: minio/minio
-    container_name: object-storage
-    environment:
-      - MINIO_ROOT_USERA=
-      - MINIO_ROOT_PASSWORD=
+    container_name: minio 
+    ports:
+      - "9000:9000"
     volumes:
-      - "/mnt/data:/data"
+      - ./db/minio:/data
+    environment:
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    command: server /data
   client:
     # build:
     #   context: ./client
@@ -45,7 +48,7 @@ services:
       - REACT_APP_AUTH_API_KEY=asd
       - REACT_APP_NO_SECRET=somecode
     volumes:
-      - "./client/src:/app/src"
+    - "./client/src:/app/src"
   mongo-db:
     container_name: db
     image: mongo
