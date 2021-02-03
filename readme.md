@@ -51,6 +51,12 @@ Make sure to set the correct env variables on the `docker-compose.dev.yml` file.
 The file storage vars can be your AWS credentials. By default those vars are set wiht the local minio cluster.
 FILE_STORA_ENDPOINT should be 127.17.0.1. localhost wont work because of the docker virtual network and signedurl generation.
 
+**Client App**
+Disable for now. Run it by runing: 
+_Install dependencies before_
+```
+$ cd client & npm start
+```
 
 **Minio cluster**
 Before start: create the folder /date inside minio-cluster folder. This is the place where all your files will be stored.

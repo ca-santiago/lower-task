@@ -29,15 +29,15 @@ services:
     # build:
     #   context: ./client
     #dockerfile: Dockerfile.dev
-    image: lowertask-dev/client
-    ports:
-      - 3001:3000
-    environment:
-      - REACT_APP_TASK_API_KEY=asd
-      - REACT_APP_AUTH_API_KEY=asd
-      - REACT_APP_NO_SECRET=somecode
-    volumes:
-      - "./client/src:/app/src"
+    #image: lowertask-dev/client
+    #ports:
+      #- 3001:3000
+    #environment:
+      #- REACT_APP_TASK_API_KEY=asd
+      #- REACT_APP_AUTH_API_KEY=asd
+      #- REACT_APP_NO_SECRET=somecode
+    #volumes:
+      #- "./client/src:/app/src"
   mongo-db:
     container_name: db
     image: mongo
