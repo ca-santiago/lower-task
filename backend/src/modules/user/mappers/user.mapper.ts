@@ -60,7 +60,7 @@ export class UserMapper implements Mapper<User, UserDTO, UserPersistenceDTO>{
         }
     };
 
-    public toDTO(user: User): UserDTO {
+    public toDTO(user: User, extra: { pictureURL: string }): UserDTO {
         const picture = user.picture?.raw ? user.picture.raw : undefined;
         return {
             name: {
@@ -70,7 +70,10 @@ export class UserMapper implements Mapper<User, UserDTO, UserPersistenceDTO>{
             email: user.email.value, createdAt: user.createdAt,
             isEmailVerified: user.isEmailVerfied,
             id: user.id.value,
-            profilePicture: picture,
+            profilePicture: {
+								...picture,
+								url: extra.pictureURL
+						},
         }
     };
 

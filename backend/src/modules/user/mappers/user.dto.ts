@@ -11,5 +11,6 @@ export interface UserDTO {
     profilePicture?: {
         format: string;
 				keyName: string;
+				url: string;
     },
 }

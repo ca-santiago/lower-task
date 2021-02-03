@@ -11,6 +11,7 @@ import { UserMapper } from "../../mappers/user.mapper";
 import { JWTPayload } from "../../domain/jwt";
 import IAuthService from "../../services/IAuthService";
 import { Guard } from "../../../../shared/core/Guard";
+import {IOBjectStorageService} from "../../../../shared/services/IObjectStorage";
 
 
 
@@ -19,7 +20,8 @@ export class LoginUseCase implements IUseCase<LoginDTO, Result<any>>{
     constructor(
         private readonly repo: IUserRepository,
         private readonly mapper: UserMapper,
-        private readonly authService: IAuthService
+        private readonly authService: IAuthService,
+				private readonly StorageService: IOBjectStorageService
     ) { }
 
 
@@ -55,7 +57,9 @@ export class LoginUseCase implements IUseCase<LoginDTO, Result<any>>{
                 return new UseCasesErrors.InvalidCredentials();
             }
 
-            const toDTO = this.mapper.toDTO(user);
+						const signedURL = this.StorageService.GetSignedObjectURL(user.picture.keyName);
+
+            const toDTO = this.mapper.toDTO(user, {pictureURL: signedURL});
             const payload: JWTPayload = this.mapper.toTokenPayload(
                 toDTO
             );

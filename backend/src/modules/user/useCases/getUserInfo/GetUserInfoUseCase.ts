@@ -2,6 +2,7 @@
 
 import { Result } from "../../../../shared/core/Result";
 import { IUseCase } from "../../../../shared/core/UseCase";
+import {IOBjectStorageService} from "../../../../shared/services/IObjectStorage";
 import { UseCasesErrors } from "../../../../shared/useCases/Errors";
 import { UserDTO } from "../../mappers/user.dto";
 import { UserMapper } from "../../mappers/user.mapper";
@@ -16,6 +17,7 @@ export class GetUserInfoUseCase implements IUseCase<GetUserInfoDTO, Result<any>>
     constructor(
         private readonly repo: IUserRepository,
         private readonly mapper: UserMapper,
+				private readonly FileService: IOBjectStorageService,
     ) { }
 
     async run(request: GetUserInfoDTO): Promise<Result<UserDTO>> {
@@ -26,8 +28,11 @@ export class GetUserInfoUseCase implements IUseCase<GetUserInfoDTO, Result<any>>
 
             if (!user)
                 return new UseCasesErrors.NotFound();
+							
+						const signedURL = this.FileService.GetSignedObjectURL(user.picture.keyName);
 
-            const userMappedtoDTO = this.mapper.toDTO(user)
+						const extraArgs = { pictureURL: signedURL }
+            const userMappedtoDTO = this.mapper.toDTO(user, extraArgs)
 
             return Result.ok(userMappedtoDTO);
         } catch (err) {

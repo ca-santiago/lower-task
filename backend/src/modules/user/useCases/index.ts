@@ -18,10 +18,10 @@ const repo = new MongodbRepository(mapper);
 
 const createUser = new CreateUser(repo, mapper);
 const deleteUser = new DeleteUser(repo);
-const getUserInfoUseCase = new GetUserInfoUseCase(repo, mapper);
-const loginUseCase = new LoginUseCase(repo, mapper, authService)
+const getUserInfoUseCase = new GetUserInfoUseCase(repo, mapper, StorageService);
+const loginUseCase = new LoginUseCase(repo, mapper, authService, StorageService)
 const uploadProfilePicture = new UploadProfilePictureUseCase(repo, mapper, StorageService);
-const getUsersProfile = new GetUsersProfileUseCase(repo, mapper);
+const getUsersProfile = new GetUsersProfileUseCase(repo, mapper, StorageService);
 
 export {
   createUser,

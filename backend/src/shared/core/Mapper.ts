@@ -8,5 +8,5 @@
 export interface Mapper<E, O, P> {
     toDomain: (rawData: P) => E | Promise<E>;
     toPersistence: (domain: E) => P;
-    toDTO: (domain: E) => O;
+    toDTO: (domain: E, extra: object) => O;
 }
