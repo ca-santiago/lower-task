@@ -28,11 +28,8 @@ export class UserMapper implements Mapper<User, UserDTO, UserPersistenceDTO>{
         let picture = null;
         if (rawData.picture) {
             picture = Picture.create({
-                baseName: rawData.picture.baseName,
                 format: rawData.picture.format,
-                thumbnail: rawData.picture.thumbnail,
-                small: rawData.picture.small,
-                large: rawData.picture.large,
+								keyName: rawData.picture.keyName,
             }).getValue();
         }
         return User.create({
@@ -57,11 +54,8 @@ export class UserMapper implements Mapper<User, UserDTO, UserPersistenceDTO>{
             createdAt: user.createdAt,
             id: user.id.value,
             picture: user.picture ? {
-                baseName: user.picture.baseName,
+                keyName: user.picture.keyName,
                 format: user.picture.format,
-                large: user.picture.large,
-                small: user.picture.small,
-                thumbnail: user.picture.thumnbnail,
             } : null,
         }
     };
@@ -103,10 +97,7 @@ export class UserMapper implements Mapper<User, UserDTO, UserPersistenceDTO>{
 
         const pictureOrError = Picture.create({
             format: rawData.picture.format,
-            small: rawData.picture.small,
-            large: rawData.picture.large,
-            thumbnail: rawData.picture.thumbnail,
-            baseName: rawData.baseName
+            keyName: rawData.keyName
         });
         const isDate = moment.isDate(rawData.dob);
 

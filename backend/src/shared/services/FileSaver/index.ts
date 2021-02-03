@@ -18,6 +18,13 @@ const StorageService =  makeSaveFileS3({
 	BucketName: FILE_STORAGE_NAME
 });
 
+import fs from 'fs';
+import path from 'path';
+
+//fs.readFile(path.join(__dirname, "testing.jpg"), (err, data)=>{
+	//StorageService.SaveFile(data, "testing.jpg");
+//});
+
 export {
     saveFile,
     StorageService

@@ -24,19 +24,14 @@ const makeSaveFileS3: MakeObjectStorageService = (config: {
         region, signatureVersion: 'v4'
     });
 
-    function SaveFile(data: Buffer, key: string){
+    async function SaveFile(data: Buffer, key: string){
         const params = { Bucket: currBucketName, Key: key, Body: data};
-        s3.putObject(params, (err, data)=>{
-            if(err)
-                return console.log(err)
-        });
-        return '';
+        await s3.putObject(params).promise();
+				return;
     }
 
 		function GetSignedObjectURL(fileName: string): string {
-				const res = s3.getSignedUrl('getObject', { Bucket: currBucketName, Key: fileName });
-				console.log(res);
-				return res;
+				return s3.getSignedUrl('getObject', { Bucket: currBucketName, Key: fileName});
 		}
 
     function SetBucketName(name){

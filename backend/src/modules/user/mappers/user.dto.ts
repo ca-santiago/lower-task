@@ -10,8 +10,6 @@ export interface UserDTO {
     id: string;
     profilePicture?: {
         format: string;
-        thumbnail: string;
-        small: string;
-        large: string;
+				keyName: string;
     },
 }

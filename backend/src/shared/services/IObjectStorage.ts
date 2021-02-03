@@ -2,7 +2,7 @@
 /* return the current storage region */
 export type GetRegion = () => string;
 
-export type SaveFile = (data: Buffer, key: string) => string;
+export type SaveFile = (data: Buffer, key: string) => Promise<void>;
 
 export type SetBucketName =  (name: string) => void;
 

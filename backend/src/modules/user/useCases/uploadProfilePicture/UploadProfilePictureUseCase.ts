@@ -14,13 +14,15 @@ import { UserMapper } from "../../mappers/user.mapper";
 
 import moment from 'moment'
 import Jimp from "jimp";
+import {IOBjectStorageService} from "../../../../shared/services/IObjectStorage";
 
 
 export class UploadProfilePictureUseCase implements IUseCase<UploadlPictureDTO, Result<any>> {
 
     constructor(
         private readonly userRepo: IUserRepository,
-        private readonly mapper: UserMapper
+        private readonly mapper: UserMapper,
+				private readonly FileStorageService: IOBjectStorageService,
     ) { }
 
     async run(request: UploadlPictureDTO): Promise<Result<any>> {
@@ -34,26 +36,25 @@ export class UploadProfilePictureUseCase implements IUseCase<UploadlPictureDTO, 
         if (!user)
             return new UseCasesErrors.Unauthorized();
 
+
+				// TODO: Remove those try declaration from all use cases.
+		    // the contrller try should catch those exceptions
         try {
+						
+						//TODO: Apply try chatch here in order to catch some service errors
+						// and throw an specific errror.
+						const fileName = `${user.id.value}--${moment().format()}.png`
+						await this.uploadFile(fileName, guardPictureResult.getValue());
 
-            (async () => {
-                const baseName = moment() + '-somePublicId-';
-                const thumbnailURL = await this.processFile(request.file, { h: 70, w: 70 }, baseName);
-                const smallURL = await this.processFile(request.file, { h: 400, w: 400 }, baseName);
-                const largeURL = await this.processFile(request.file, { h: 1024, w: 1024 }, baseName);
+            const newPicture = Picture.create({
+                format: Jimp.MIME_PNG,
+                keyName:  fileName,
+            });
 
-                const newPicture = Picture.create({
-                    format: Jimp.MIME_PNG,
-                    large: largeURL,
-                    small: smallURL,
-                    thumbnail: thumbnailURL,
-                    baseName,
-                });
+            const pictureInstance = newPicture.getValue()
+            user.updatePicture(pictureInstance);
 
-                const pictureInstance = newPicture.getValue()
-                user.updatePicture(pictureInstance);
-                this.userRepo.save(this.mapper.toPersistence(user))
-            })()
+            this.userRepo.save(this.mapper.toPersistence(user))
             return Result.ok();
             
         } catch (err) {
@@ -61,6 +62,10 @@ export class UploadProfilePictureUseCase implements IUseCase<UploadlPictureDTO, 
             return Result.fail(['500']);
         }
     }
+
+		private async uploadFile(fileName: string, data: Buffer) {
+				await this.FileStorageService.SaveFile(data, fileName);
+		}
 
     private async processFile(data: Buffer, size: { w: number, h: number }, baseName: string) {
         const { h, w } = size;

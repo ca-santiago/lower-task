@@ -10,10 +10,7 @@ export interface UserPersistenceDTO {
     createdAt: string;
     id: string;
     picture: {
-        baseName: string;
         format: string;
-        large: string;
-        small: string;
-        thumbnail: string;
+        keyName: string;
     } | null;
 }

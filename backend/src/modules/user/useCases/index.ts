@@ -10,6 +10,7 @@ import { UserMapper } from '../mappers/user.mapper'
 // import { LocalRepo } from '../repositories/LocalUserRepo'
 import { authService } from '../services'
 import { GetUsersProfileUseCase } from './getUsersProfile/UseCase'
+import {StorageService} from '../../../shared/services/FileSaver'
 
 const mapper = new UserMapper();
 // const localRepo = new LocalRepo(mapper);
@@ -19,7 +20,7 @@ const createUser = new CreateUser(repo, mapper);
 const deleteUser = new DeleteUser(repo);
 const getUserInfoUseCase = new GetUserInfoUseCase(repo, mapper);
 const loginUseCase = new LoginUseCase(repo, mapper, authService)
-const uploadProfilePicture = new UploadProfilePictureUseCase(repo, mapper);
+const uploadProfilePicture = new UploadProfilePictureUseCase(repo, mapper, StorageService);
 const getUsersProfile = new GetUsersProfileUseCase(repo, mapper);
 
 export {
