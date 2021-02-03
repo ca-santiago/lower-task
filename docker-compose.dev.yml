@@ -20,7 +20,7 @@ services:
       - DEV_MONGO_USER=
       - DEV_MONGO_PASSWORD=
       - FILE_STORAGE_NAME=lower-task-image-bucket 
-      - FILE_STORAGE_ENDPOINT=172.17.0.1:9000
+      - FILE_STORAGE_ENDPOINT=http://192.168.43.204:9000
       - FILE_STORAGE_ACCESS_KEY=minioadmin
       - FILE_STORAGE_SECRET_ACCESS=minioadmin
     volumes:

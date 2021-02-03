@@ -49,7 +49,9 @@ Run docker compose dev file.
 
 Make sure to set the correct env variables on the `docker-compose.dev.yml` file. see `backend/.env.example`.
 The file storage vars can be your AWS credentials. By default those vars are set wiht the local minio cluster.
-FILE_STORA_ENDPOINT should be 127.17.0.1. localhost wont work because of the docker virtual network and signedurl generation.
+
+FILE_STORA_ENDPOINT should be your machine API address, the default one in docker-compode.dev.yml file is mine. Make sure to put http. Localhost wont work because of the docker virtual network and signedurl generation.
+
 
 **Client App**
 Disable for now. Run it by runing: 
