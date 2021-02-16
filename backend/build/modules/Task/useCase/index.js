@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.findTaskByOwnerUseCase = exports.updateTaskUseCase = exports.findTaskByContentUseCase = exports.deleteTaskUseCase = exports.createTaskUseCase = void 0;
+var UseCase_1 = require("./createTask/UseCase");
+var TaskMapper_1 = require("../mapper/TaskMapper");
+var repository_1 = require("../repository");
+var UseCase_2 = require("./deleteTask/UseCase");
+var UseCase_3 = require("./FindByContent/UseCase");
+var UseCase_4 = require("./updateTask/UseCase");
+var UseCase_5 = require("./FindByOwner/UseCase");
+var mapper = new TaskMapper_1.TaskMapper();
+exports.createTaskUseCase = new UseCase_1.CreateTaskUseCase(mapper, repository_1.mongoRepo);
+exports.deleteTaskUseCase = new UseCase_2.DeleteTaskUseCase(repository_1.mongoRepo);
+exports.findTaskByContentUseCase = new UseCase_3.FindTaskByContentUseCase(repository_1.mongoRepo, mapper);
+exports.updateTaskUseCase = new UseCase_4.UpdateTaskUseCase(repository_1.mongoRepo);
+exports.findTaskByOwnerUseCase = new UseCase_5.GetTasksByOwnerUseCase(repository_1.mongoRepo, mapper);

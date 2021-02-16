@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getTasksByOwnerController = exports.updateTaskController = exports.findTaskByContentController = exports.delteTaskController = exports.createTaskController = void 0;
+var CreateTask_1 = require("./CreateTask");
+var useCase_1 = require("../../useCase");
+var DeleteTaskController_1 = require("./DeleteTaskController");
+var FindTaskController_1 = require("./FindTaskController");
+var UpdateTaskController_1 = require("./UpdateTaskController");
+var FindByOwnerController_1 = require("./FindByOwnerController");
+exports.createTaskController = new CreateTask_1.CreateTaskController(useCase_1.createTaskUseCase);
+exports.delteTaskController = new DeleteTaskController_1.DeleteTaskController(useCase_1.deleteTaskUseCase);
+exports.findTaskByContentController = new FindTaskController_1.FindTaskByContentController(useCase_1.findTaskByContentUseCase);
+exports.updateTaskController = new UpdateTaskController_1.UpdateTaskController(useCase_1.updateTaskUseCase);
+exports.getTasksByOwnerController = new FindByOwnerController_1.FindTaskByOwnerController(useCase_1.findTaskByOwnerUseCase);

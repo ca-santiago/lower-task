@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = require("express");
+var verifyBearerToken_1 = require("../../../../shared/infra/middlewares/verifyBearerToken");
+var Controllers_1 = require("../Controllers");
+var TaskRouter = express_1.Router();
+TaskRouter.post('/', verifyBearerToken_1.VerifyHeaderToken, function (req, res) { return Controllers_1.createTaskController.execute(req, res); });
+TaskRouter.get('/s/', verifyBearerToken_1.VerifyHeaderToken, function (req, res) { return Controllers_1.findTaskByContentController.execute(req, res); });
+TaskRouter.delete('/:id', verifyBearerToken_1.VerifyHeaderToken, function (req, res) { return Controllers_1.delteTaskController.execute(req, res); });
+TaskRouter.put('/:id', verifyBearerToken_1.VerifyHeaderToken, function (req, res) { return Controllers_1.updateTaskController.execute(req, res); });
+TaskRouter.get('/owner/:id', verifyBearerToken_1.VerifyHeaderToken, function (req, res) { return Controllers_1.getTasksByOwnerController.execute(req, res); });
+exports.default = TaskRouter;

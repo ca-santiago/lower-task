@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.mongoRepo = exports.taskRepo = void 0;
+var TaskMapper_1 = require("../mapper/TaskMapper");
+var mongo_1 = require("./mongo");
+var taskMapper = new TaskMapper_1.TaskMapper();
+var mongoRepo = new mongo_1.MongooseTaskRepo(taskMapper);
+exports.mongoRepo = mongoRepo;
+var taskRepo = mongoRepo;
+exports.taskRepo = taskRepo;

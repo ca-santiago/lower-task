@@ -7,10 +7,11 @@ import { AuthStore, AuthContext } from '../auth/helpers';
 
 function App() {
   return (
-    <Provider store={AuthStore} context={AuthContext} >
-      <AppRouter />
-    </Provider>
-  );
+		<Provider store={AuthStore} context={AuthContext} >
+		<AppRouter />
+		</Provider>
+	);
+  	
 }
 
 export { App };
