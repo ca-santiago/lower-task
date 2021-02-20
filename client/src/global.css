@@ -1,0 +1,10 @@
+* {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	/* font-family: "Lato", "Helvetica Neue", sans-serif; */
+	background-color: #f4f4f7;
+	color: #808080;
+}

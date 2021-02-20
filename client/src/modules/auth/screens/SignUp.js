@@ -6,11 +6,12 @@ import {Link} from "react-router-dom";
 
 import "./styles/styles.css";
 
-function SignInScreen(props) {
+function SignUpScreen(props) {
 	const {signin} = props;
 
 	const [err, setErr] = useState("");
 	const [email, setEmail] = useState("");
+	const [name, setName] = useState("");
 	const [pass, setPass] = useState("");
 
 	function _signin(e) {
@@ -18,7 +19,7 @@ function SignInScreen(props) {
 
 		if (!pass || !email) {
 			console.log(pass, email);
-			setErr("Correo y contraseña requeridos");
+			setErr("!Ups! Parece que faltó un dato.<br /> Verifique por favor.");
 			return;
 		}
 		setErr("");
@@ -28,18 +29,19 @@ function SignInScreen(props) {
 	return (
 		<React.Fragment>
 			<div className='Container'>
-				<h1 className='TitleApp'>AnotherNotes🛀</h1>
+				<h2 className='Title'>Crea tu cuenta</h2>
 				<form onSubmit={_signin} className='Form'>
 					{err && <p>{err}</p>}
-					<label>Inicia sesión con tu correo y contraseña</label>
+					<label>Llena los campos con tus datos.</label>
 					<input type='email' placeholder='Email' onChange={data => setEmail(data.target.value)} className='Input' />
+					<input type='text' placeholder='Username' onChange={data => setName(data.target.value)} className='Input' />
 					<input type='password' placeholder='Password' onChange={e => setPass(e.target.value)} className='Input' />
-					<input type='submit' value='Ingresar' className='Button' />
+					<input type='submit' value='Guardar' className='Button' />
 				</form>
 			</div>
 			<label className='ChangeLogIn'>
-				¿No tienes cuenta? <br />
-				<Link to="./SignUp" className='link'>¡Empieza a organizarte!</Link>
+				¿Ya tienes cuenta? <br />
+				<Link to="/" className='link'>Entonces ven por acá</Link>
 			</label>
 		</React.Fragment>
 	);
@@ -54,5 +56,5 @@ const actionCreators = {
 	signout: authActions.SignOut,
 };
 
-const mappedScreen = connect(mapState, actionCreators, null, {context: AuthContext})(SignInScreen);
-export {mappedScreen as SignInScreen};
+const mappedScreen = connect(mapState, actionCreators, null, {context: AuthContext})(SignUpScreen);
+export {mappedScreen as SignUpScreen};
