@@ -1,6 +1,6 @@
 
 import v1 from './V1'
 
-export default {
+export {
   v1
 };
