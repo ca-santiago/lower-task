@@ -3,9 +3,8 @@ import { Picture } from "../domain/Picture";
 
 export function MapPictureToDTO(picture: Picture) {
     const mapped = {
-        thumbnail: picture.thumnbnail,
-        small: picture.small,
-        large: picture.large,
+        url: picture.getAccessURL,
+        name: picture.keyName,
         format: picture.format,
     }
     return mapped;
