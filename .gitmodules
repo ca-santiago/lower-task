@@ -1,0 +1,3 @@
+[submodule "auth-service"]
+	path = auth-service
+	url = https://github.com/grem-dev/node-auth-system.git
