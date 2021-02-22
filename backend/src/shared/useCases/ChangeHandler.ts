@@ -1,9 +1,6 @@
 import { Result } from "../core/Result";
 
-
-
 export class ChangeHandler {
-
   results: Result<any>[];
   errors: Result<any>[];
 
@@ -18,12 +15,11 @@ export class ChangeHandler {
 
   public addChange(r: Result<any>) {
     this.results.push(r);
-    if (r.isSuccess === false)
-      this.errors.push(r)
+    if (r.isSuccess === false) this.errors.push(r);
   }
 
   public getCombinedResult(): Result<any> {
-    return Result.combine(this.results)
+    return Result.combine(this.results);
   }
 
   public getErrors(): Result<any>[] {

@@ -1,7 +1,3 @@
+import { initMongoConnection } from "./mongodb";
 
-import { initMongoConnection } from './mongodb'
-
-
-export {
-    initMongoConnection
-}
+export { initMongoConnection };

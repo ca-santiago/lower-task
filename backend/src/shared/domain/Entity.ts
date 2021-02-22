@@ -1,7 +1,6 @@
 import { EntityId } from "./EntityId";
 
-export class Entity<T>{
-
+export class Entity<T> {
   protected readonly _id: EntityId;
   protected props: T;
 
@@ -9,5 +8,4 @@ export class Entity<T>{
     this._id = id ? id : EntityId.new();
     this.props = props;
   }
-
 }

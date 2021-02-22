@@ -1,4 +1,6 @@
+import { Schema, SchemaType, SchemaTypeOpts } from "mongoose";
 
-import mongoose, { Schema, SchemaType, SchemaTypeOpts } from 'mongoose'
-
-export type MongooseTypedSchema<T> = Record<keyof T, SchemaTypeOpts<any> | Schema | SchemaType>;
+export type MongooseTypedSchema<T> = Record<
+  keyof T,
+  SchemaTypeOpts<any> | Schema | SchemaType
+>;
