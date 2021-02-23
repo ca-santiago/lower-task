@@ -19,6 +19,8 @@ services:
       - PORT=4040
     ports:
       - "4040:4040"
+    volumes:
+      - "./auth-service/src:/app/src"
   api:
     build:
       context: ./backend
@@ -43,6 +45,7 @@ services:
       - FILE_STORAGE_ENDPOINT=http://localhost:9000
       - FILE_STORAGE_ACCESS_KEY=minioadmin
       - FILE_STORAGE_SECRET_ACCESS=minioadmin
+      - AUTH_SERVICE_URL=http://localhost:4040
     volumes:
       - "./backend/src:/app/src"
    #client:
