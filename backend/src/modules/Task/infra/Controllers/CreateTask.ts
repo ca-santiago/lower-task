@@ -14,7 +14,7 @@ export class CreateTaskController extends BaseController {
 
   protected async executeImpl(req: express.Request, res: express.Response): Promise<any> {
     const dto = req.body as CreateTaskDTO;
-    dto.ownerId = req.params.userId;
+    dto.ownerId = req.body.accountId;
 
     const bodyErrors: string[] = [];
     if (typeof dto.title !== 'string') {

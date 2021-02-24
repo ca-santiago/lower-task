@@ -13,7 +13,7 @@ export class FindTaskByOwnerController extends BaseController {
   protected async executeImpl(req: express.Request, res: express.Response): Promise<any> {
     const dto: GetTasksByOwnerDTO = {
       ownerId: req.params.id,
-      userId: req.params.userId
+      userId: req.body.accountId
     }
 
     const useCaseResult = await this.useCase.run(dto);

@@ -37,7 +37,7 @@ export class UpdateTaskUseCase implements IUseCase<UpdateTaskDTO, Result<any>>{
             return new UseCasesErrors.NotFound();
 			
         // Validate task owner or have permisions
-        if (TaskOrError.id.value !== userId)
+        if (TaskOrError.owner.value !== userId)
             return new UseCasesErrors.Unauthorized();
 
         // Instance creation

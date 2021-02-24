@@ -13,12 +13,12 @@ export class UpdateTaskController extends BaseController {
     }
 
     async executeImpl(req: express.Request, res: express.Response): Promise<void> {
-
+        const { content, title, accountId } = req.body;
         const dto: UpdateTaskDTO = {
             taskId: req.params.id,
-            userId: req.params.userId,
-            content: req.body.content,
-            title: req.body.title,
+            userId: accountId,
+            content,
+            title
         }
 
         const useCaseResult = await this.useCase.run(dto);

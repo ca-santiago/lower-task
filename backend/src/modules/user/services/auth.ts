@@ -26,7 +26,7 @@ export async function verifyCredentials(
       method: "POST",
       body: JSON.stringify(bodyPayload)
     });
-    console.log(res);
+
     if(res.status === 401 || res.status === 400)
       return Result.fail(['Unauthenticated']);
 

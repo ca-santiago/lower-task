@@ -1,6 +1,6 @@
 
 import { Router } from 'express'
-import { VerifyHeaderToken } from '../../../../shared/infra/middlewares/verifyBearerToken';
+import { authenticateRequest } from '../../../user/infra/middlewares';
 import { 
    createTaskController, delteTaskController, findTaskByContentController,
    updateTaskController, getTasksByOwnerController
@@ -9,27 +9,27 @@ import {
 const TaskRouter = Router();
 
 TaskRouter.post('/',
-    VerifyHeaderToken,
+    authenticateRequest,
     (req, res) => createTaskController.execute(req, res)
 );
 
 TaskRouter.get('/s/',
-    VerifyHeaderToken,
+    authenticateRequest,
     (req, res) => findTaskByContentController.execute(req, res)
 );
 
 TaskRouter.delete('/:id',
-    VerifyHeaderToken,
+    authenticateRequest,
     (req, res) => delteTaskController.execute(req, res)
 );
 
 TaskRouter.put('/:id',
-    VerifyHeaderToken,
+    authenticateRequest,
     (req, res) => updateTaskController.execute(req, res)
 )
 
 TaskRouter.get('/owner/:id',
-    VerifyHeaderToken,
+    authenticateRequest,
     (req, res) => getTasksByOwnerController.execute(req, res)
 )
 
