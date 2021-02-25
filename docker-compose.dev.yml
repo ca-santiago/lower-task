@@ -36,6 +36,8 @@ services:
       - mongo-db
       - auth-service
       - message-queue
+    links:
+      - message-queue
     environment:
       - PORT=3001
       - NODE_ENV=DEV

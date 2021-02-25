@@ -1,4 +1,3 @@
-import { StartUserPubSub } from "../modules/user/PubSub";
 import { GetMQInstance } from "../shared/services/MQ";
 import { loadMongoConfig } from "./loadMongoConfig";
 import {
@@ -11,7 +10,6 @@ export async function StartServices() {
   await LoadMogoService();
 	try {
 	 await GetMQInstance();
-   await StartUserPubSub();
 	} catch (err) {}
 }
 

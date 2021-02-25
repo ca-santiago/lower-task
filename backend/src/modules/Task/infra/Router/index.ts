@@ -1,10 +1,9 @@
-
-import { Router } from 'express'
-import { authenticateRequest } from '../../../user/infra/middlewares';
+import { Router } from "express";
+import { authenticateRequest } from "../middlewares/autenticateRequest";
 import { 
    createTaskController, delteTaskController, findTaskByContentController,
    updateTaskController, getTasksByOwnerController
-} from '../Controllers';
+} from "../Controllers";
 
 const TaskRouter = Router();
 
