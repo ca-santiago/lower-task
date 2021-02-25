@@ -18,4 +18,6 @@ const StorageService = makeSaveFileS3({
   BucketName: FILE_STORAGE_NAME,
 });
 
+console.log(StorageService)
+
 export { saveFile, StorageService };
