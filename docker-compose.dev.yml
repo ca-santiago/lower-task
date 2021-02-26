@@ -79,7 +79,7 @@ services:
       - auth-service
       # - client
     ports:
-      - "8181:80"
+      - "80:80"
   mongo-db:
     container_name: db
     image: mongo
