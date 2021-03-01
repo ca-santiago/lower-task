@@ -23,9 +23,9 @@ services:
       - "./auth-service/src:/app/src"
   todo-service:
     build:
-      context: ./backend
+      context: ./todo
       dockerfile: Dockerfile.dev
-    image: lowertask-dev/backend
+    image: lowertask-dev/todo
     ports:
      - "3001"
     depends_on:
@@ -44,7 +44,7 @@ services:
       - MQ_SERVICE_NAME=todo-service
       - AUTH_SERVICE_URL=http://auth-service:4040
     volumes:
-      - "./backend/src:/app/src"
+      - "./todo/src:/app/src"
    #client:
     # build:
     #   context: ./client
