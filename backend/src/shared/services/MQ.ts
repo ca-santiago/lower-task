@@ -65,7 +65,8 @@ export class MQServiceConsumer {
 
   private async Init(): Promise<void> {
 		this.channel = await this.connection.createChannel();
-
+		console.log('=========================================================')
+		console.log(this.queue, this.exchange)
 		await this.channel.assertQueue(this.queue);
 		await this.channel.bindQueue(this.queue, this.exchange, this.listenPattern);
 		this.on();

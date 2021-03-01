@@ -4,12 +4,14 @@ import {
   initMongoConnection,
   MongoConnectionConf
 } from "../shared/infra/mongodb";
+import {StartTodoSubscriptions} from "../modules/Workspace/subscriptions";
 
 
 export async function StartServices() {
   await LoadMogoService();
 	try {
 	 await GetMQInstance();
+	 await StartTodoSubscriptions();
 	} catch (err) {}
 }
 
