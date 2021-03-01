@@ -41,16 +41,24 @@ Lowertask was built over diferent tecnologies in all the development spectrum.
 
 **Before start:** Docker compose will attach a folder called `db` in the current directory. This does not exist, so you need to create it or you can change the attached directory in `mong-db: volumes`.
 
+Make sure to run the `docker-compose.yml` file who start the services needed to run the proyect.
+```
+$ cd dev-services/
+$ docker-compose up -d
+```
+
 Run docker compose dev file.
 
 ```Bash
-$ docker-compose -f docker-compose.dev.yml up -d
+$ HOSTIP=<yourhostip> docker-compose -f docker-compose.dev.yml up -d
 ```
+To get the host ip variable value run this:
 
+```
+$ hostname -i | awk '{ print $1 }'
+```
 Make sure to set the correct env variables on the `docker-compose.dev.yml` file. see `backend/.env.example`.
 The file storage vars can be your AWS credentials. By default those vars are set with a local minio cluster, so the url is pointing to host IP.
-
-FILE_STORA_ENDPOINT should be your machine API address, the default one in docker-compode.dev.yml file is mine. Make sure to put http. Localhost won't work because of the docker virtual network and signedurl generation.
 
 
 **Client App**
@@ -59,17 +67,6 @@ _Install dependencies before_
 ```
 $ cd client & npm start
 ```
-
-**Minio cluster**
-
-_You can skip this config, minio cluster is not been now_
-
-Before start: create the folder /date inside minio-cluster folder. This is the place where all your files will be stored.
-Go to minio-cluster folder and run:
-```
-$ docker-compose up -d
-```
-You can access to the minio admin page by hitting localhost:9000 with the default cedentials. `minioadmin` `minioadmin`
 
 ### Build production
 

@@ -10,18 +10,15 @@ services:
     environment:
       - NODE_ENV=DEV
       - DEV_MONGO_PORT=27017
-      - DEV_MONGO_HOST=db
+      - DEV_MONGO_HOST=${HOSTIP}
       - DEV_MONGO_DBNAME=auth-app
-      - MQ_URL=amqp://queue
+      - MQ_URL=amqp://${HOSTIP}
       - MQ_QUEUE=auth-service-queue
       - MQ_EXCHANGE=auth-service-exchange
       - MQ_SERVICE_NAME=auth-service
       - PORT=4040
     ports:
       - "4040"
-    depends_on:
-      - mongo-db
-      - message-queue
     volumes:
       - "./auth-service/src:/app/src"
   todo-service:
@@ -31,26 +28,17 @@ services:
     image: lowertask-dev/backend
     ports:
      - "3001"
-    # network_mode: host 
     depends_on:
-      - mongo-db
       - auth-service
-      - message-queue
-    links:
-      - message-queue
     environment:
       - PORT=3001
       - NODE_ENV=DEV
       - DEV_MONGO_PORT=27017
-      - DEV_MONGO_HOST=db
+      - DEV_MONGO_HOST=${HOSTIP}
       - DEV_MONGO_DBNAME=taskapp
       - DEV_MONGO_USER=
       - DEV_MONGO_PASSWORD=
-      - FILE_STORAGE_NAME=lower-task-image-bucket 
-      - FILE_STORAGE_ENDPOINT=http://192.168.43.1:9000
-      - FILE_STORAGE_ACCESS_KEY=minioadmin
-      - FILE_STORAGE_SECRET_ACCESS=minioadmin
-      - MQ_URL=amqp://queue
+      - MQ_URL=amqp://${HOSTIP}
       - MQ_QUEUE=todo-app-queue
       - MQ_EXCHANGE=todo-service-exchange
       - MQ_SERVICE_NAME=todo-service
@@ -80,15 +68,3 @@ services:
       # - client
     ports:
       - "80:80"
-  mongo-db:
-    container_name: db
-    image: mongo
-    volumes:
-      - "./db:/data/db"
-    ports:
-      - "27017:27017"
-  message-queue:
-    container_name: queue
-    image: rabbitmq:3-management
-    ports:
-      - 15672:15672
