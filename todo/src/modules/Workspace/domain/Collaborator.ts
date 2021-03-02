@@ -8,7 +8,15 @@ export class Collaborator extends Entity<CollaboratorProps> {
 	get id(): EntityId {
 	  return this.props.id;
 	}
+
+	get name(): string {
+    return this.props._name;	
+	}
 	
+	get email(): string {
+    return this.props.email;	
+	}
+
 	constructor(props: CollaboratorProps)	{
 	  super(props);
 	}

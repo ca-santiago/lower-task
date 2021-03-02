@@ -10,6 +10,30 @@ export class Workspace extends Entity<WorkspaceProps> {
     return this._id;
   }
 
+	get owner(): EntityId {
+    return this.props.owner;
+	}
+	
+	get name(): string {
+    return this.props._name;	
+	}
+
+	get collabs(): CollabCollection {
+    return this.props.collabs;	
+	}
+
+	get maxTasks(): number {
+    return this.props.maxTasks;
+	}
+
+	get maxCollabs(): number {
+    return this.props.maxCollaborators;	
+	}
+
+	get tasks(): TaskCollection {
+    return this.props.tasks;	
+	}
+
   private constructor(props: WorkspaceProps, id?: EntityId) {
     super(props, id);
   }

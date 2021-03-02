@@ -10,7 +10,7 @@ export class Space extends AggregateRoot<SpaceProps> {
   }
 
   get owner(): EntityId {
-    return this.owner;
+    return this.props.owner;
   }
 
   get workspaces(): WorkspaceCollection {
@@ -26,7 +26,13 @@ export class Space extends AggregateRoot<SpaceProps> {
   }
 
   public static create(props: SpaceProps, id?: EntityId): Result<Space> {
-    const finalProps: SpaceProps = { ...props };
+    const workspaces = props.workspaces
+      ? props.workspaces
+      : WorkspaceCollection.create([]);
+    const finalProps: SpaceProps = {
+      ...props,
+      workspaces,
+    };
     return Result.ok(new Space(finalProps));
   }
 }

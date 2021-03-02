@@ -6,8 +6,7 @@ import { TaskContent } from "./Content";
 import { TaskProps } from "./Props";
 import { TaskTitle } from "./Tittle";
 
-export class Task extends Entity<TaskProps>{
-
+export class Task extends Entity<TaskProps> {
   get content(): Nullable<TaskContent> {
     return this.props.content;
   }
@@ -24,12 +23,16 @@ export class Task extends Entity<TaskProps>{
     return this.props.owner;
   }
 
-	get id(): EntityId {
-	  return this._id;
-	}
+  get id(): EntityId {
+    return this._id;
+  }
+
+  get workspace(): EntityId {
+    return this.props.workspace;
+  }
 
   private constructor(props: TaskProps, id: EntityId) {
-    super(props, id)
+    super(props, id);
   }
 
   public updateTitle(t: TaskTitle): Result<any> {
@@ -43,9 +46,6 @@ export class Task extends Entity<TaskProps>{
   }
 
   public static create(props: TaskProps, id: EntityId): Result<Task> {
-
-    return Result.ok(
-      new Task(props, id)
-    );
+    return Result.ok(new Task(props, id));
   }
 }

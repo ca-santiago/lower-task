@@ -17,7 +17,7 @@ export interface WorkspaceProps {
   _name: string;
   maxCollaborators: number;
   maxTasks: number;
-  collabs?: CollabCollection;
+  collabs: CollabCollection;
   tasks?: TaskCollection;
 }
 
