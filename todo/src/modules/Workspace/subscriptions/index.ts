@@ -3,7 +3,7 @@ import {
   MQServiceConsumer,
   MQServicePublisher,
 } from "../../../shared/services/MQ";
-import {createSpaceUseCase} from "../useCases";
+import { createSpaceUseCase } from "../useCases";
 
 export async function StartTodoSubscriptions() {
   const mq = await GetMQInstance();
@@ -28,11 +28,11 @@ export async function StartTodoSubscriptions() {
   mqConsumer.registerListener(
     "auth-service.account.created",
     (data: Buffer) => {
-			const payload = JSON.parse(data.toString());
-			createSpaceUseCase.run({
-			 name: payload.extra.props.value,
-			 accountId: payload.accoutnId,
-			});
-		}
+      const payload = JSON.parse(data.toString());
+      createSpaceUseCase.run({
+        name: payload.extra.props.value,
+        accountId: payload.accoutnId,
+      });
+    }
   );
 }
