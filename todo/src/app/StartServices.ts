@@ -1,10 +1,6 @@
 import { GetMQInstance } from "../shared/services/MQ";
-import { loadMongoConfig } from "./loadMongoConfig";
-import {
-  initMongoConnection,
-  MongoConnectionConf
-} from "../shared/infra/mongodb";
-import {StartTodoSubscriptions} from "../modules/Workspace/subscriptions";
+import { initMongoConnection } from "../shared/infra/mongodb";
+import { StartTodoSubscriptions } from "../modules/Workspace/subscriptions";
 
 
 export async function StartServices() {
@@ -19,8 +15,7 @@ export async function StartServices() {
 async function LoadMogoService() {
   try {
     console.log('[DB] Starting database conection');
-    const mongoConfig: MongoConnectionConf = loadMongoConfig();
-    await initMongoConnection(mongoConfig);
+    await initMongoConnection(process.env.MONGO_URL);
     console.log('[DB] MongoDB connection started');
   } catch (err) {
     console.log('[DB] Could not connect to database');
