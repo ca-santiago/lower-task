@@ -39,19 +39,23 @@ Lowertask was built over diferent tecnologies in all the development spectrum.
 
 ### Build development
 
-**Before start:** Docker compose will attach a folder called `db` in the current directory. This does not exist, so you need to create it or you can change the attached directory in `mong-db: volumes`.
+**Before start**
 
-Make sure to run the `docker-compose.yml` file who start the services needed to run the proyect.
+Make sure to run the `docker-compose.yml` file who start the services needed to run the proyect in development version.
 ```
 $ cd dev-services/
 $ docker-compose up -d
 ```
+Wait at least one minute for the minio service.
 
+---
 Run docker compose dev file.
 
 ```Bash
 $ HOSTIP=<yourhostip> docker-compose -f docker-compose.dev.yml up -d
 ```
+HOSTIP is used to connect with dev services. It is not needed in the development version or if you have dedicated servers for rabbit and mongodb. In that case just replace the connections URL on the compose file.
+
 To get the host ip variable value run this:
 
 ```
