@@ -11,16 +11,21 @@ export class SpaceMapper {
       _id: s.id.value,
       name: s._name,
       owner: s.owner.value,
+			maxWorkspaces: s.maxWorkspaces,
+			totalWorkspaces: s.totalWorkspaces,
     };
     return output;
   }
 
   public toDomain(raw: SpaceRepoDTO): Space {
+		const id = EntityId.from(raw._id).getValue();
     const props: SpaceProps = {
       owner: EntityId.from(raw.owner).getValue(),
       _name: raw.name,
+			maxWorkspaces: raw.maxWorkspaces,
+			totalWorkspaces: raw.totalWorkspaces
     };
-    const a = Space.create(props).getValue();
+    const a = Space.create(props, id).getValue();
     return a;
   }
 }

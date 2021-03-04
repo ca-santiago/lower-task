@@ -10,6 +10,8 @@ export interface SpaceProps {
   _name: string;
   owner: EntityId;
   workspaces?: WorkspaceCollection;
+	totalWorkspaces: number;
+	maxWorkspaces: number;
 }
 
 export interface WorkspaceProps {
@@ -19,6 +21,8 @@ export interface WorkspaceProps {
   maxTasks: number;
   collabs: CollabCollection;
   tasks?: TaskCollection;
+  totalTasks: number;
+  createdAt: string;
 }
 
 export interface CollaboratorProps {

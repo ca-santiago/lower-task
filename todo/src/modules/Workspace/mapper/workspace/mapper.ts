@@ -23,6 +23,8 @@ export class WorkspaceMapper {
       owner: w.owner.value,
       maxTasks: w.maxTasks,
       maxCollaborators: w.maxCollabs,
+      totalTasks: w.totalTasks,
+      createdAt: w.createdAt,
     };
     return output;
   }
@@ -47,6 +49,8 @@ export class WorkspaceMapper {
       owner: EntityId.from(w.owner).getValue(),
       _name: w.name,
       collabs: CollabCollection.create(cInstances),
+      totalTasks: w.totalTasks,
+      createdAt: w.createdAt
     };
     const output = Workspace.create(wProps).getValue();
     return output;

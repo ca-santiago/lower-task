@@ -32,7 +32,15 @@ export class Workspace extends Entity<WorkspaceProps> {
 
 	get tasks(): TaskCollection {
     return this.props.tasks;	
-	}
+  }
+  
+  get totalTasks(): number {
+    return this.props.totalTasks;
+  }
+
+  get createdAt(): string {
+    return this.props.createdAt;
+  }
 
   private constructor(props: WorkspaceProps, id?: EntityId) {
     super(props, id);

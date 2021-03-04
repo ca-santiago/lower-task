@@ -1,10 +1,15 @@
 import { Result } from "../../../shared/core/Result";
 import { AggregateRoot } from "../../../shared/domain/AggregateRoot";
 import { EntityId } from "../../../shared/domain/EntityId";
-import { WorkspaceCollection } from "./Collections";
 import { SpaceProps } from "./types";
+import { Workspace } from "./Workspace";
+import {
+  CollabCollection,
+	WorkspaceCollection
+} from "./Collections";
 
 export class Space extends AggregateRoot<SpaceProps> {
+
   get _name(): string {
     return this.props._name;
   }
@@ -17,9 +22,34 @@ export class Space extends AggregateRoot<SpaceProps> {
     return this.props.workspaces;
   }
 
+	get maxWorkspaces(): number {
+		return this.props.maxWorkspaces;	
+	}
+
+	get totalWorkspaces(): number {
+		return this.props.totalWorkspaces;	
+	}
+
   get id(): EntityId {
     return this._id;
   }
+
+	public createWorkspace(name: string): Result<void> {
+		const newW = Workspace.create({
+		  owner: this.props.owner,
+			_name: name, 
+			collabs: CollabCollection.create([]),
+		 	maxTasks: 1000,
+      maxCollaborators: 5,
+      totalTasks: 0,
+      createdAt: new Date().toUTCString()
+		}).getValue();
+		if(this.props.totalWorkspaces + 1 > this.props.maxWorkspaces)
+		  return Result.fail(['Max number of worksapces reached']); 
+    this.workspaces.add(newW);
+    this.props.totalWorkspaces += 1;
+		return Result.ok();
+	}
 
   private constructor(props: SpaceProps, id?: EntityId) {
     super(props, id);
@@ -33,6 +63,6 @@ export class Space extends AggregateRoot<SpaceProps> {
       ...props,
       workspaces,
     };
-    return Result.ok(new Space(finalProps));
+    return Result.ok(new Space(finalProps, id));
   }
 }

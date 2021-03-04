@@ -19,6 +19,8 @@ const WsSchemaDef: MongooseTypedSchema<WorkspaceRepoDTO> = {
       name: String,
     },
   ],
+  totalTasks: Number,
+  createdAt: Date,
 };
 const WsSchema = new Schema(WsSchemaDef);
 

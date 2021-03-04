@@ -6,6 +6,8 @@ const SchemaDef: MongooseTypedSchema<SpaceRepoDTO> = {
   _id: String,
   name: String,
   owner: String,
+	maxWorkspaces: Number,
+	totalWorkspaces: Number,
 };
 
 interface SpaceDocument extends Document, SpaceRepoDTO {

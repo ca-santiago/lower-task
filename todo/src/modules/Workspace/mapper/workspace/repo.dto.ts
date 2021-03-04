@@ -5,10 +5,12 @@ export interface WorkspaceRepoDTO {
 	maxCollaborators: number;
 	maxTasks: number;
   collabs: Array<CollabRepoDTO>;
+  totalTasks: number;
+  createdAt: string;
 }
 
 export interface CollabRepoDTO {
   id: string;
   email: string;
-  name: string;	
+  name: string;
 }

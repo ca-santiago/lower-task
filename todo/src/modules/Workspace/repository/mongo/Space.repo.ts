@@ -1,6 +1,7 @@
 import { WorkspaceCollection } from "../../domain/Collections";
 import { Space } from "../../domain/Space";
 import { SpaceMapper } from "../../mapper/space/mapper";
+import { SpaceRepoDTO } from "../../mapper/space/repo.dto";
 import { ISpaceRepo } from "../ISpaceRepo";
 import { IWorkspaceRepo } from "../IWorkspaceRepo";
 import { SpaceModel } from "./Space.model";
@@ -25,8 +26,13 @@ export class SpaceMongoRepository implements ISpaceRepo {
         upsert: true,
       }).exec();
     } catch (err) {
-			throw err;
-		}
+      throw err;
+    }
+  }
+
+  public async findByOwnerId(id: string): Promise<Space | null> {
+    const res = await SpaceModel.findOne({ owner: id }).exec();
+    return !res ? null : this.spaceMapper.toDomain(res as SpaceRepoDTO);
   }
 
   public async delete(id: string) {

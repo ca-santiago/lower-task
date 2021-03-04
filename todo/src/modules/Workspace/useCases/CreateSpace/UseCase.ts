@@ -22,6 +22,8 @@ export class CreateSpaceUseCase implements IUseCase<CreateSpaceDTO, _Result> {
       const finalProps: SpaceProps = {
         _name: name,
         owner,
+				maxWorkspaces: 5,
+				totalWorkspaces: 0,
       };
       const newSpace = Space.create(finalProps).getValue();
 			

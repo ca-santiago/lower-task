@@ -11,7 +11,7 @@ export class WorkspaceCollection extends ManagedList<Workspace> {
   }
 
   public exist(w: Workspace): boolean {
-    return !this.items.find((theCollab) => w.id.value === theCollab.id.value);
+    return !!this.items.find((theCollab) => w.id.value === theCollab.id.value);
   }
 
   public static create(props: Workspace[]): WorkspaceCollection {
