@@ -1,11 +1,10 @@
 import { Result } from "../../../../../shared/core/Result";
 import { IUseCase } from "../../../../../shared/core/UseCase";
 import { ISpaceRepo } from "../../../repository/ISpaceRepo";
-import { _Result } from "../../CreateSpace/UseCase";
 import { CreateWorkspaceDTO } from "./DTO";
 
 // TODO replace with either
-export type _Response = Result<void>;
+export type _Result = Result<void>;
 
 export class CreateWorkspaceUseCase implements IUseCase<CreateWorkspaceDTO, _Result> {
   constructor(private readonly spaceRepo: ISpaceRepo) {}

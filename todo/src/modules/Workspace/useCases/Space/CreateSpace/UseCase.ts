@@ -1,9 +1,9 @@
-import { Result } from "../../../../shared/core/Result";
-import { IUseCase } from "../../../../shared/core/UseCase";
-import { EntityId } from "../../../../shared/domain/EntityId";
-import { Space } from "../../domain/Space";
-import { SpaceProps } from "../../domain/types";
-import { ISpaceRepo } from "../../repository/ISpaceRepo";
+import { Result } from "../../../../../shared/core/Result";
+import { IUseCase } from "../../../../../shared/core/UseCase";
+import { EntityId } from "../../../../../shared/domain/EntityId";
+import { Space } from "../../../domain/Space";
+import { SpaceProps } from "../../../domain/types";
+import { ISpaceRepo } from "../../../repository/ISpaceRepo";
 import { CreateSpaceDTO } from "./DTO";
 
 export type _Result = Result<null>;
