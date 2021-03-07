@@ -6,7 +6,8 @@ import { CreateWorkspaceUseCase } from "./Workspace/CreateWorkspace/UseCase";
 import { GetTasksByWorkspaceUseCase } from "./Task/GetTasksByWorkspace/UseCase";
 
 import { spaceMongoRepo, taskRepo, workspaceRepo } from "../repository";
-import { spaceMapper, taskMapper } from "../mapper";
+import { spaceMapper, taskMapper, workspaceMapper } from "../mapper";
+import { GetWorkspacesByOwnerUseCase } from "./Workspace/GetByOwner/UseCase";
 
 const wsService = new WorkspaceService();
 
@@ -27,4 +28,8 @@ export const getTasksByWorkspaceUseCase = new GetTasksByWorkspaceUseCase(
   taskRepo,
   workspaceRepo,
   taskMapper
+);
+export const getWorkspacesByOwnerUseCase = new GetWorkspacesByOwnerUseCase(
+  workspaceRepo,
+  workspaceMapper
 );

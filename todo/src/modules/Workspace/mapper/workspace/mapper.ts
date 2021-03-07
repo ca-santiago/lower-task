@@ -3,12 +3,13 @@ import { Collaborator } from "../../domain/Collaborator";
 import { CollabCollection } from "../../domain/Collections";
 import { CollaboratorProps, WorkspaceProps } from "../../domain/types";
 import { Workspace } from "../../domain/Workspace";
+import { OwnerCollabDTO, OwnerWorkspaceDTO } from "./public.dto";
 import { CollabRepoDTO, WorkspaceRepoDTO } from "./repo.dto";
 
 export class WorkspaceMapper {
   private mapCollabRepo(c: CollabCollection): Array<CollabRepoDTO> {
     return c.Items.map((theC) => ({
-      name: theC.name,
+      name: theC._name,
       id: theC.id.value,
       email: theC.email,
     }));
@@ -19,7 +20,7 @@ export class WorkspaceMapper {
     const output: WorkspaceRepoDTO = {
 			_id: w.id.value,
       collabs,
-      name: w.name,
+      name: w._name,
       owner: w.owner.value,
       maxTasks: w.maxTasks,
       maxCollaborators: w.maxCollabs,
@@ -55,5 +56,28 @@ export class WorkspaceMapper {
     };
     const output = Workspace.create(wProps, id).getValue();
     return output;
+  }
+
+  public toOwnerDTO(ws: Workspace): OwnerWorkspaceDTO {
+    const collabs = ws.collabs.Items.map(c => this.mapCollabToDTO(c));
+    const output: OwnerWorkspaceDTO = {
+      id: ws.id.value,
+      createAt: ws.createdAt,
+      maxCollaborators: ws.maxCollabs,
+      maxTasks: ws.maxTasks,
+      name: ws._name,
+      owner: ws.owner.value,
+      totalTasks: ws.totalTasks,
+      collabs,
+    }
+    return output;
+  }
+
+  public mapCollabToDTO(data: Collaborator): OwnerCollabDTO { 
+    return {
+      email: data.email,
+      id: data.id.value,
+      name: data._name,
+    }
   }
 }

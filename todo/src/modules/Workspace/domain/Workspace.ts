@@ -15,7 +15,7 @@ export class Workspace extends Entity<WorkspaceProps> {
     return this.props.owner;
 	}
 	
-	get name(): string {
+	get _name(): string {
     return this.props._name;	
 	}
 

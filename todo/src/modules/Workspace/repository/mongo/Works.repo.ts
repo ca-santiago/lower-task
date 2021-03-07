@@ -12,6 +12,14 @@ export class WorkspaceRepo implements IWorkspaceRepo {
     private readonly taskRepo: ITaskRepo
   ) {}
 
+  async findByOwner(id: string): Promise<Workspace[]> {
+    const results = await WorkspaceModel.find({ owner: id }).exec();
+    const output = results.map(ws => {
+      return this.workspaceMapper.toDomain(ws as WorkspaceRepoDTO);
+    })
+    return output;
+  }
+
   public async save(w: Workspace): Promise<void> {
     const mappedWs = this.workspaceMapper.toRepository(w);
     const upsetDate = { ...mappedWs };

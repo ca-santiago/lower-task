@@ -5,7 +5,10 @@ import {
   createWorkspaceController,
   getSpaceByOwnerController,
 } from ".";
-import { getTasksByWorkspaceController } from "./controllers";
+import {
+  getTasksByWorkspaceController,
+  getWorkspacesByOwnerController,
+} from "./controllers";
 
 // Space ROUTER SECTION
 const SpaceRouter = Router();
@@ -25,11 +28,12 @@ WorkspaceRouter.put("/:id/tasks", authenticateRequest, (req, res) =>
   createTaskController.execute(req, res)
 );
 
-WorkspaceRouter.get("/:wsId/tasks", authenticateRequest, (req, res) => 
+WorkspaceRouter.get("/:wsId/tasks", authenticateRequest, (req, res) =>
   getTasksByWorkspaceController.execute(req, res)
-)
+);
 
-export { 
-  SpaceRouter,
-  WorkspaceRouter,
-};
+WorkspaceRouter.get("/", authenticateRequest, (req, res) =>
+  getWorkspacesByOwnerController.execute(req, res)
+);
+
+export { SpaceRouter, WorkspaceRouter };
