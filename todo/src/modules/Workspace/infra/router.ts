@@ -6,19 +6,25 @@ import {
   getSpaceByOwnerController,
 } from ".";
 
-// TODO Create router for Workspace
+// Space ROUTER SECTION
 const SpaceRouter = Router();
-
-SpaceRouter.put("/", authenticateRequest, (req, res) =>
-  createWorkspaceController.execute(req, res)
-);
 
 SpaceRouter.get("/:id", authenticateRequest, (req, res) =>
   getSpaceByOwnerController.execute(req, res)
 );
 
-SpaceRouter.put("/:id/tasks", authenticateRequest, (req, res) =>
+// Workspace ROUTER SECTION
+const WorkspaceRouter = Router();
+
+WorkspaceRouter.put("/", authenticateRequest, (req, res) =>
+  createWorkspaceController.execute(req, res)
+);
+
+WorkspaceRouter.put("/:id/tasks", authenticateRequest, (req, res) =>
   createTaskController.execute(req, res)
 );
 
-export { SpaceRouter };
+export { 
+  SpaceRouter,
+  WorkspaceRouter,
+};
