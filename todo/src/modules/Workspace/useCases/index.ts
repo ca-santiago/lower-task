@@ -1,10 +1,12 @@
 import { WorkspaceService } from "../domain/services/Workspace";
-import { spaceMapper } from "../mapper";
 import { CreateSpaceUseCase } from "./Space/CreateSpace/UseCase";
 import { GetSpaceByOwnerUseCase } from "./Space/GetSpaceByOwner/UseCase";
 import { CreateTaskUseCase } from "./Task/CreateTask/UseCase";
 import { CreateWorkspaceUseCase } from "./Workspace/CreateWorkspace/UseCase";
-import { spaceMongoRepo, workspaceRepo } from "../repository";
+import { GetTasksByWorkspaceUseCase } from "./Task/GetTasksByWorkspace/UseCase";
+
+import { spaceMongoRepo, taskRepo, workspaceRepo } from "../repository";
+import { spaceMapper, taskMapper } from "../mapper";
 
 const wsService = new WorkspaceService();
 
@@ -20,4 +22,9 @@ export const createTaskUseCase = new CreateTaskUseCase(
   spaceMongoRepo,
   workspaceRepo,
   wsService
+);
+export const getTasksByWorkspaceUseCase = new GetTasksByWorkspaceUseCase(
+  taskRepo,
+  workspaceRepo,
+  taskMapper
 );

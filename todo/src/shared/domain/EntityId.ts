@@ -14,6 +14,9 @@ export class EntityId {
     return new EntityId(uuid);
   }
 
+  public equals(id: EntityId): boolean {
+    return id.value === this.value;
+  }
   /**
    * Create an Entity id from value.
    * Validate the rawId and return a new EntityId instance

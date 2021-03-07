@@ -4,6 +4,10 @@ import { ValueObject } from "../../../shared/domain/ValueObject";
 export class TaskContent extends ValueObject<string>{
   private static maxTaskContentLenght = 1024;
 
+  get value(): string {
+    return this.props;
+  }
+
   private constructor(props: string) {
     super(props)
   }

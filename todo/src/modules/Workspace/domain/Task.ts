@@ -6,7 +6,7 @@ import { TaskContent } from "./Content";
 import { TaskProps } from "./Props";
 
 export class Task extends Entity<TaskProps> {
-  get content(): Nullable<TaskContent> {
+  get content(): TaskContent {
     return this.props.content;
   }
 
