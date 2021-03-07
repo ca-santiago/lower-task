@@ -8,7 +8,6 @@ interface TaskDocument extends Document, TaskRepoDTO {
 
 const TaskSchemaDef: MongooseTypedSchema<TaskRepoDTO> = {
   _id: String,
-  title: String,
   content: String,
   createAt: String,
   owner: String,

@@ -49,7 +49,12 @@ export class Space extends AggregateRoot<SpaceProps> {
     this.workspaces.add(newW);
     this.props.totalWorkspaces += 1;
 		return Result.ok();
-	}
+  }
+  
+  public updateWorkspace(ws: Workspace): Result<void> {
+    this.props.workspaces.add(ws);
+    return Result.ok(null);
+  }
 
   private constructor(props: SpaceProps, id?: EntityId) {
     super(props, id);

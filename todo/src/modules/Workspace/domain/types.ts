@@ -35,7 +35,6 @@ export type DescriptionProps = string;
 
 // TASK
 export interface TaskProps {
-  title: TaskTitle;
   content: Nullable<TaskContent>;
   createAt: string;
   owner: EntityId;

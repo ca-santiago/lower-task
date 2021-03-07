@@ -4,4 +4,5 @@ import {Workspace} from "../domain/Workspace";
 export interface IWorkspaceRepo {
 	save(w: Workspace): Promise<void>;
 	saveMany(ws: WorkspaceCollection): Promise<void[]>;
+	findById(id: string): Promise<Workspace>;
 }

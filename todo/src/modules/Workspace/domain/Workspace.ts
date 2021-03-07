@@ -3,6 +3,7 @@ import { Entity } from "../../../shared/domain/Entity";
 import { EntityId } from "../../../shared/domain/EntityId";
 import { WorkspaceProps } from "./types";
 import { TaskCollection, CollabCollection } from "./Collections/";
+import { Task } from "./Task";
 
 export class Workspace extends Entity<WorkspaceProps> {
 
@@ -40,6 +41,18 @@ export class Workspace extends Entity<WorkspaceProps> {
 
   get createdAt(): string {
     return this.props.createdAt;
+  }
+
+  public addTask(t: Task): Result<void> {
+    if(this.props.totalTasks + 1 > this.props.maxTasks)
+      return Result.fail(['Max tasks reached']);
+    this.props.tasks.add(t);
+    this.props.totalTasks += 1;
+    return Result.ok(null);
+  }
+
+  public isCollab(id: EntityId): boolean {
+    return !!this.props.collabs.Items.find(c => c.id.value === id.value);
   }
 
   private constructor(props: WorkspaceProps, id?: EntityId) {

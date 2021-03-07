@@ -37,12 +37,13 @@ export class WorkspaceMapper {
     }));
   }
 
-  toMapper(w: WorkspaceRepoDTO): Workspace {
+  toDomain(w: WorkspaceRepoDTO): Workspace {
     const collabsProps = this.mapCollabDomain(w.collabs);
     const cInstances = collabsProps.map((c) =>
       Collaborator.create(c).getValue()
     );
 
+    const id = EntityId.from(w._id).getValue();
     const wProps: WorkspaceProps = {
       maxCollaborators: w.maxCollaborators,
       maxTasks: w.maxTasks,
@@ -52,7 +53,7 @@ export class WorkspaceMapper {
       totalTasks: w.totalTasks,
       createdAt: w.createdAt
     };
-    const output = Workspace.create(wProps).getValue();
+    const output = Workspace.create(wProps, id).getValue();
     return output;
   }
 }
