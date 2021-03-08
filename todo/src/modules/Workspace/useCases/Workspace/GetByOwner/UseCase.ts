@@ -7,17 +7,18 @@ import { GetWorkspacesByOwnerDTO } from "./DTO";
 
 export type _Result = Result<OwnerWorkspaceDTO[]>;
 
-export class GetWorkspacesByOwnerUseCase implements IUseCase<GetWorkspacesByOwnerDTO, _Result> {
+export class GetWorkspacesByOwnerUseCase
+  implements IUseCase<GetWorkspacesByOwnerDTO, _Result> {
   constructor(
     private readonly worksRepo: IWorkspaceRepo,
     private readonly wsMapper: WorkspaceMapper
-  ) { }
+  ) {}
 
   async run(dto: GetWorkspacesByOwnerDTO): Promise<_Result> {
     const { accountId } = dto;
 
     const results = await this.worksRepo.findByOwner(accountId);
-    const mapped = results.map(ws => this.wsMapper.toOwnerDTO(ws));
+    const mapped = results.map((ws) => this.wsMapper.toOwnerDTO(ws));
 
     return Result.ok(mapped);
   }

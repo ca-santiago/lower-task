@@ -40,8 +40,8 @@ export class CreateTaskUseCase implements IUseCase<CreateTaskDTO, _Result> {
       workspace: worksOrNull.id,
     });
     if (!taskOrError.isSuccess)
-    return new UseCasesErrors.InvalidParamError(taskOrError.error);
-    
+      return new UseCasesErrors.InvalidParamError(taskOrError.error);
+
     const res = await this.wsService.addTaskToWorkspace(
       EntityId.from(accountId).getValue(),
       space,

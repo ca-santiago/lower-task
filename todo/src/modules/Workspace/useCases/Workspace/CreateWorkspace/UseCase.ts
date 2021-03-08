@@ -6,7 +6,8 @@ import { CreateWorkspaceDTO } from "./DTO";
 // TODO replace with either
 export type _Result = Result<void>;
 
-export class CreateWorkspaceUseCase implements IUseCase<CreateWorkspaceDTO, _Result> {
+export class CreateWorkspaceUseCase
+  implements IUseCase<CreateWorkspaceDTO, _Result> {
   constructor(private readonly spaceRepo: ISpaceRepo) {}
 
   public async run(dto: CreateWorkspaceDTO): Promise<_Result> {

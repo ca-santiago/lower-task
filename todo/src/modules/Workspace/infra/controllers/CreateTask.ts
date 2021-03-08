@@ -17,8 +17,7 @@ export class CreateTaskController extends BaseController {
     //if (!id || typeof id != "string")
     //  errors.push("Should provide workspace id");
 
-    if(errors.length > 0)
-      return this.badRequest(res, errors);
+    if (errors.length > 0) return this.badRequest(res, errors);
 
     const dto = { accountId, workspaceId: id, taskContent: content };
     const useCaseRes = await this.useCase.run(dto);
