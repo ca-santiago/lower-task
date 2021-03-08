@@ -17,6 +17,10 @@ SpaceRouter.get("/:id", authenticateRequest, (req, res) =>
   getSpaceByOwnerController.execute(req, res)
 );
 
+SpaceRouter.get("/", authenticateRequest, (req, res) => {
+  getSpaceByOwnerController.execute(req, res)
+})
+
 // Workspace ROUTER SECTION
 const WorkspaceRouter = Router();
 
