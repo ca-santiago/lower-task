@@ -1,7 +1,8 @@
 export interface WorkspaceRepoDTO {
   _id: string;
   owner: string;
-	name: string;
+  name: string;
+  spaceId: string;
 	maxCollaborators: number;
 	maxTasks: number;
   collabs: Array<CollabRepoDTO>;

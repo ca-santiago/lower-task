@@ -43,6 +43,10 @@ export class Workspace extends Entity<WorkspaceProps> {
     return this.props.createdAt;
   }
 
+  get spaceId(): EntityId {
+    return this.props.spaceId;
+  }
+
   public addTask(t: Task): Result<void> {
     if(this.props.totalTasks + 1 > this.props.maxTasks)
       return Result.fail(['Max tasks reached']);

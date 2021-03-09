@@ -16,7 +16,7 @@ export class CreateWorkspaceUseCase
     const spaceOrNull = await this.spaceRepo.findByOwnerId(accountId);
     if (!spaceOrNull) return Result.fail(["Not found"]);
 
-    const ws = spaceOrNull.createWorkspace(name);
+    const ws = spaceOrNull.createWorkspace(name, spaceOrNull.id);
     if (ws.isSuccess == false)
       return Result.fail(["Limite de Workspaces alcanzado"]);
 

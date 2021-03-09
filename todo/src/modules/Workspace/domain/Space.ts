@@ -34,7 +34,7 @@ export class Space extends AggregateRoot<SpaceProps> {
     return this._id;
   }
 
-	public createWorkspace(name: string): Result<void> {
+	public createWorkspace(name: string, space: EntityId): Result<void> {
 		const newW = Workspace.create({
 		  owner: this.props.owner,
 			_name: name, 
@@ -42,7 +42,8 @@ export class Space extends AggregateRoot<SpaceProps> {
 		 	maxTasks: 1000,
       maxCollaborators: 5,
       totalTasks: 0,
-      createdAt: new Date().toUTCString()
+      createdAt: new Date().toUTCString(),
+      spaceId: space
 		}).getValue();
 		if(this.props.totalWorkspaces + 1 > this.props.maxWorkspaces)
 		  return Result.fail(['Max number of worksapces reached']); 

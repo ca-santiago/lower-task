@@ -20,6 +20,7 @@ export class WorkspaceMapper {
     const output: WorkspaceRepoDTO = {
 			_id: w.id.value,
       collabs,
+      spaceId: w.spaceId.value,
       name: w._name,
       owner: w.owner.value,
       maxTasks: w.maxTasks,
@@ -45,7 +46,9 @@ export class WorkspaceMapper {
     );
 
     const id = EntityId.from(w._id).getValue();
+    const spaceId = EntityId.from(w.spaceId).getValue();
     const wProps: WorkspaceProps = {
+      spaceId, 
       maxCollaborators: w.maxCollaborators,
       maxTasks: w.maxTasks,
       owner: EntityId.from(w.owner).getValue(),

@@ -17,6 +17,7 @@ export interface SpaceProps {
 export interface WorkspaceProps {
   owner: EntityId;
   _name: string;
+  spaceId: EntityId;
   maxCollaborators: number;
   maxTasks: number;
   collabs: CollabCollection;
