@@ -50,9 +50,15 @@ export class Workspace extends Entity<WorkspaceProps> {
   public addTask(t: Task): Result<void> {
     if(this.props.totalTasks + 1 > this.props.maxTasks)
       return Result.fail(['Max tasks reached']);
-    this.props.tasks.add(t);
+    this.props.tasks.addItem(t);
     this.props.totalTasks += 1;
     return Result.ok(null);
+  }
+
+  public removeTask(t: Task): Result<void> {
+    this.props.tasks.addRemoved(t);
+    this.props.totalTasks -= 1;
+    return Result.ok();
   }
 
   public isCollab(id: EntityId): boolean {

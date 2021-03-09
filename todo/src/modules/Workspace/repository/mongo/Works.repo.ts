@@ -34,11 +34,18 @@ export class WorkspaceRepo implements IWorkspaceRepo {
 
   public async saveMany(ws: WorkspaceCollection) {
     try {
-      return await Promise.all(ws.newItems.map((i) => this.save(i)));
-      // await Promise.all(ws.removed.map(i => this.delete(i)))
+      await Promise.all(ws.newItems.map(i => this.save(i)));
+      await Promise.all(ws.removed.map(i => this.delete(i)));
+      return
     } catch (err) {
+      // TODO: exect roll back
       return;
     }
+  }
+
+  async delete(w: Workspace): Promise<void> {
+    await WorkspaceModel.findOneAndDelete({ id: w.id.value }).exec();
+    return;
   }
 
   async findById(id: string): Promise<Workspace | null> {

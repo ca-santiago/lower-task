@@ -1,3 +1,4 @@
+import { Result } from "../../../../shared/core/Result";
 import { WorkspaceCollection } from "../../domain/Collections";
 import { Space } from "../../domain/Space";
 import { SpaceMapper } from "../../mapper/space/mapper";
@@ -22,7 +23,7 @@ export class SpaceMongoRepository implements ISpaceRepo {
 
     try {
       await this.saveWorkspaces(s.workspaces);
-      SpaceModel.findByIdAndUpdate(mappedData._id, upsetData, {
+      await SpaceModel.findByIdAndUpdate(mappedData._id, upsetData, {
         upsert: true,
       }).exec();
     } catch (err) {
@@ -39,7 +40,8 @@ export class SpaceMongoRepository implements ISpaceRepo {
     throw new Error("Method not implemented");
   }
 
-  public async findById(id) {
-    throw new Error("Method not implemented");
+  async findById(id: string): Promise<Space | null> {
+    const exist = await SpaceModel.findById(id).exec();
+    return exist ? this.spaceMapper.toDomain(exist) : null;
   }
 }

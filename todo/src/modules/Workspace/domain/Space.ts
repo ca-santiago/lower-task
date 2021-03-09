@@ -47,13 +47,13 @@ export class Space extends AggregateRoot<SpaceProps> {
 		}).getValue();
 		if(this.props.totalWorkspaces + 1 > this.props.maxWorkspaces)
 		  return Result.fail(['Max number of worksapces reached']); 
-    this.workspaces.add(newW);
+    this.workspaces.addItem(newW);
     this.props.totalWorkspaces += 1;
 		return Result.ok();
   }
   
   public updateWorkspace(ws: Workspace): Result<void> {
-    this.props.workspaces.add(ws);
+    this.props.workspaces.addItem(ws);
     return Result.ok(null);
   }
 

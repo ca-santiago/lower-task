@@ -17,12 +17,27 @@ export class TaskRepo implements ITaskRepo {
   }
 
   async saveMany(ts: TaskCollection) {
-    return Promise.all(ts.Items.map((t) => this.save(t)));
+    console.log(ts);
+    await Promise.all([
+      ...ts.removed.map( t => this.delete(t)),
+      ...ts.NewItems.map( t => this.save(t)),
+    ]);
+    return;
   }
 
   async findByWorkspace(id: string): Promise<Task[]> {
     const results = await TaskModel.find({ workspace: id }).exec();
-    const output = results.map(t => this.taskMapper.toDomain(t));
+    const output = results.map((t) => this.taskMapper.toDomain(t));
     return output;
+  }
+
+  async findById(id: string): Promise<Task | null> {
+    const taskOrNull = await TaskModel.findById(id).exec();
+    return taskOrNull ? this.taskMapper.toDomain(taskOrNull) : null;
+  }
+
+  async delete(t: Task): Promise<void> {
+    await TaskModel.findByIdAndDelete(t.id.value).exec();
+    return;
   }
 }

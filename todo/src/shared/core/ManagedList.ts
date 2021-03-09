@@ -19,18 +19,17 @@ export abstract class ManagedList<T> {
 
   public abstract exist(arg: T): boolean;
 
-  public remove(toRemove: T): void {
+  public addRemoved(toRemove: T): void {
     const exist = this.exist(toRemove);
     if (exist) {
       this.items = this.items.filter(
         (theItem) => !this.compare(theItem, toRemove)
       );
-      this.removed.push(toRemove);
     }
+    this.removed.push(toRemove);
   }
 
-  public add(toAdd: T): void {
-    this.remove(toAdd);
+  public addItem(toAdd: T): void {
 		if(this.isNew(toAdd)){
       this.newItems.push(toAdd);
 		}

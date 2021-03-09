@@ -9,7 +9,9 @@ import {
   getSpaceByOwnerUseCase,
   getTasksByWorkspaceUseCase,
   getWorkspacesByOwnerUseCase,
+  deleteTaskUseCase,
 } from "../../useCases";
+import { DeleteTaskController } from "./DeleteTask";
 
 export const createWorkspaceController = new CreateWorkspaceController(
   createWorkspaceUseCase
@@ -24,3 +26,4 @@ export const getTasksByWorkspaceController = new GetTaskByWorkspaceController(
 export const getWorkspacesByOwnerController = new GetWorkspacesByOwnerController(
   getWorkspacesByOwnerUseCase
 );
+export const deleteTaskController = new DeleteTaskController(deleteTaskUseCase);

@@ -6,6 +6,7 @@ import {
   getSpaceByOwnerController,
 } from ".";
 import {
+  deleteTaskController,
   getTasksByWorkspaceController,
   getWorkspacesByOwnerController,
 } from "./controllers";
@@ -18,8 +19,8 @@ SpaceRouter.get("/:id", authenticateRequest, (req, res) =>
 );
 
 SpaceRouter.get("/", authenticateRequest, (req, res) => {
-  getSpaceByOwnerController.execute(req, res)
-})
+  getSpaceByOwnerController.execute(req, res);
+});
 
 // Workspace ROUTER SECTION
 const WorkspaceRouter = Router();
@@ -27,6 +28,12 @@ const WorkspaceRouter = Router();
 WorkspaceRouter.put("/", authenticateRequest, (req, res) =>
   createWorkspaceController.execute(req, res)
 );
+
+WorkspaceRouter.get("/", authenticateRequest, (req, res) =>
+  getWorkspacesByOwnerController.execute(req, res)
+);
+
+// Tasks ROUTER SECTION
 
 WorkspaceRouter.put("/:id/tasks", authenticateRequest, (req, res) =>
   createTaskController.execute(req, res)
@@ -36,8 +43,10 @@ WorkspaceRouter.get("/:wsId/tasks", authenticateRequest, (req, res) =>
   getTasksByWorkspaceController.execute(req, res)
 );
 
-WorkspaceRouter.get("/", authenticateRequest, (req, res) =>
-  getWorkspacesByOwnerController.execute(req, res)
+WorkspaceRouter.delete(
+  "/:wsId/tasks/:taskId",
+  authenticateRequest,
+  (req, res) => deleteTaskController.execute(req, res)
 );
 
 export { SpaceRouter, WorkspaceRouter };
